@@ -4,52 +4,59 @@ import { useNavigate } from "react-router-dom";
 import Consulting from "../Components/Consulting";
 
 const Jeevanya = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#C2E6FF] to-white p-6">
+    <div
+      style={{ fontFamily: 'Barlow, sans-serif' }}
+      className="min-h-screen bg-gradient-to-br from-[#E1F5FE] via-[#D4F1F4] to-[#FFFFFF] p-6"
+    >
       {/* Navbar */}
-      <Navbar/>
+      <Navbar />
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-t from-[#D7EFFF] to-white rounded-4xl p-10 mt-10 shadow-md flex justify-between">
+      <div className="bg-gradient-to-t from-[#EAF6FF] to-white rounded-4xl p-10 mt-10 shadow-md flex justify-between">
         <div className="w-2/5">
-            <h2 className="text-5xl font-semibold text-gray-800">
-                Empowering Lives Through Health
-            </h2>
-            <button className="mt-20 px-4 py-2 border rounded-2xl flex items-center space-x-2 bg-white cursor-pointer hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
-                Get an appointment
-            </button>
+          <h2 className="text-5xl font-semibold text-gray-800">
+            Empowering Lives Through Health
+          </h2>
+          <button className="mt-20 px-4 py-2 border rounded-2xl flex items-center space-x-2 bg-white cursor-pointer hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
+            Get an appointment
+          </button>
         </div>
-        <div className="grid grid-cols-2 gap-4  w-3/5 ">
-        <button 
-            onClick={() => navigate('/connect')} 
-            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
+        <div className="grid grid-cols-2 gap-4 w-3/5">
+          <button
+            onClick={() => navigate("/connect")}
+            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out"
+          >
             Connect
-        </button>
+          </button>
 
-        <button 
-            onClick={() => navigate('/diagnosis')} 
-            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
+          <button
+            onClick={() => navigate("/diagnosis")}
+            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out"
+          >
             Diagnosis
-        </button>
+          </button>
 
-        <button 
-            onClick={() => navigate('/profile')} 
-            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
+          <button
+            onClick={() => navigate("/profile")}
+            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out"
+          >
             Profile
-        </button>
+          </button>
 
-        <button 
-            onClick={() => navigate('/forum')} 
-            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
+          <button
+            onClick={() => navigate("/forum")}
+            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out"
+          >
             Forum
-        </button>
+          </button>
         </div>
       </div>
 
       {/* Consulting Section */}
       <div className="mt-32"></div>
-      <Consulting/>
+      <Consulting />
 
       {/* Services Section */}
       <div className="mt-12">
@@ -57,7 +64,7 @@ const Jeevanya = () => {
         <div className="grid grid-cols-3 gap-6 mt-6">
           <div className="bg-gray-200 p-12 rounded-xl text-center text-black shadow-sm">
             <span className="text-xl py-5">
-                personalized treatment plans & proactive alerts.
+              Personalized treatment plans & proactive alerts.
             </span>
           </div>
           <div className="bg-blue-100 p-12 rounded-xl text-center shadow-sm text-black">

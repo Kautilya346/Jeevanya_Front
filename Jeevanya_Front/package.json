@@ -12,7 +12,11 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.0.12",
     "axios": "^1.8.2",
+<<<<<<< HEAD
     "groq-sdk": "^0.15.0",
+=======
+    "framer-motion": "^12.4.10",
+>>>>>>> 70e66651069ff41ab0e6a228ebb0354c92045b58
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.3.0",

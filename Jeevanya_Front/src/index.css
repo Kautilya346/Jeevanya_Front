@@ -1,1 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap");
+
+body {
+  font-family: "Barlow", sans-serif;
+}
+
+@font-face {
+  font-family: "Pixelcraft";
+  src: url("/Pixelcraft.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import "tailwindcss";

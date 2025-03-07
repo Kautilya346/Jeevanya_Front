@@ -1,55 +1,147 @@
-import React from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import axios from "axios"; // Import axios
+import doctor from "../assests/doctor.png";
+import patient from "../assests/patient.png";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+export default function Login() {
+  const [userType, setUserType] = useState("patient");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [licenseNumber, setLicenseNumber] = useState(""); // For doctors
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const transition = { type: "spring", stiffness: 120, damping: 15 };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/loginpatient",
+        userType === "patient"
+          ? { email, password }
+          : { licenseNumber, password }
+      );
+
+      console.log("Login Successful:", response.data);
+      navigate("/"); 
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed");
+    }
+  };
+
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
-        <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
-        <form>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Enter your email"
-            />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#C2E6FF] to-[#FFFFFF] p-6">
+      <div className="bg-gradient-to-b from-[#D7EFFF] to-[#FFFFFF] shadow-xl rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 max-w-5xl w-full">
+        
+        {/* Image Container */}
+        <motion.div
+          initial={false}
+          animate={{ x: userType === "patient" ? 0 : -20, opacity: 1 }}
+          transition={transition}
+          className={`flex-1 ${userType === "patient" ? "order-first" : "order-last"}`}
+        >
+          <img
+            src={userType === "patient" ? patient : doctor}
+            alt="Login"
+            className="max-w-xs md:max-w-sm"
+          />
+        </motion.div>
+
+        {/* Form Container */}
+        <motion.div
+          initial={false}
+          animate={{ x: userType === "patient" ? 0 : 20, opacity: 1 }}
+          transition={transition}
+          className="flex-1 max-w-md w-full"
+        >
+          {/* Toggle Buttons */}
+          <div className="flex justify-center gap-4 mb-6">
+            <div className="relative flex bg-gray-200 rounded-full p-1">
+              <button
+                onClick={() => setUserType("doctor")}
+                className="relative px-6 py-2 rounded-full text-gray-700 z-10 cursor-pointer"
+              >
+                Doctor
+              </button>
+              <button
+                onClick={() => setUserType("patient")}
+                className="relative px-6 py-2 rounded-full text-gray-700 z-10 cursor-pointer"
+              >
+                Patient
+              </button>
+              <motion.div
+                layoutId="activeButton"
+                className="absolute top-0 bottom-0 w-1/2 bg-[#4CC0BF] rounded-full"
+                initial={false}
+                animate={{ left: userType === "doctor" ? "0%" : "50%" }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              />
+            </div>
           </div>
-          <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Enter your password"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300"
+
+          {/* Login Form */}
+          <motion.form
+            onSubmit={handleLogin}
+            initial={false}
+            animate={{ x: 0, opacity: 1 }}
+            transition={transition}
+            className="bg-blue-50 p-6 rounded-lg shadow-md"
           >
-            Login
-          </button>
-        </form>
-        <p className="text-center text-gray-600 mt-4 text-sm">
-          Don't have an account?{" "}
-          <a href="/register" className="text-blue-500 hover:underline">
-            Sign up
-          </a>
-        </p>
+            <h2 className="text-2xl font-bold mb-4 text-center">
+              {userType === "patient" ? "Patient Login" : "Doctor Login"}
+            </h2>
+            <div className="space-y-4">
+              {userType === "patient" ? (
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                  required
+                />
+              ) : (
+                <input
+                  type="text"
+                  placeholder="License Number"
+                  value={licenseNumber}
+                  onChange={(e) => setLicenseNumber(e.target.value)}
+                  className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                  required
+                />
+              )}
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                required
+              />
+            </div>
+            {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+            <button
+              type="submit"
+              className="mt-6 w-full bg-[#4CC0BF] text-black py-2 rounded-lg font-bold hover:bg-[#3d7473] transition"
+            >
+              Login
+            </button>
+            <p className="text-center text-gray-600 mt-4 text-sm">
+              Don't have an account?{" "}
+              <button
+                onClick={() => navigate("/signup")}
+                className="text-blue-500 hover:underline cursor-pointer"
+              >
+                Sign Up
+              </button>
+            </p>
+          </motion.form>
+        </motion.div>
       </div>
     </div>
   );
-};
-
-export default LoginPage;
+}

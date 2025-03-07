@@ -1,20 +1,43 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import axios from "axios"; // Import axios
 import doctor from "../assests/doctor.png";
 import patient from "../assests/patient.png";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [userType, setUserType] = useState("patient");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [licenseNumber, setLicenseNumber] = useState(""); // For doctors
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const transition = { type: "spring", stiffness: 120, damping: 15 };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/loginpatient",
+        userType === "patient"
+          ? { email, password }
+          : { licenseNumber, password }
+      );
+
+      console.log("Login Successful:", response.data);
+      navigate("/"); 
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed");
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#C2E6FF] to-[#FFFFFF] p-6">
       <div className="bg-gradient-to-b from-[#D7EFFF] to-[#FFFFFF] shadow-xl rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 max-w-5xl w-full">
         
-        {/* Image Container (Smooth Switch) */}
+        {/* Image Container */}
         <motion.div
           initial={false}
           animate={{ x: userType === "patient" ? 0 : -20, opacity: 1 }}
@@ -28,7 +51,7 @@ export default function Login() {
           />
         </motion.div>
 
-        {/* Form Container (Moves with Image) */}
+        {/* Form Container */}
         <motion.div
           initial={false}
           animate={{ x: userType === "patient" ? 0 : 20, opacity: 1 }}
@@ -62,7 +85,7 @@ export default function Login() {
 
           {/* Login Form */}
           <motion.form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleLogin}
             initial={false}
             animate={{ x: 0, opacity: 1 }}
             transition={transition}
@@ -76,6 +99,8 @@ export default function Login() {
                 <input
                   type="email"
                   placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
                   required
                 />
@@ -83,6 +108,8 @@ export default function Login() {
                 <input
                   type="text"
                   placeholder="License Number"
+                  value={licenseNumber}
+                  onChange={(e) => setLicenseNumber(e.target.value)}
                   className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
                   required
                 />
@@ -90,10 +117,13 @@ export default function Login() {
               <input
                 type="password"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
                 required
               />
             </div>
+            {error && <p className="text-red-500 text-center mt-2">{error}</p>}
             <button
               type="submit"
               className="mt-6 w-full bg-[#4CC0BF] text-black py-2 rounded-lg font-bold hover:bg-[#3d7473] transition"
@@ -102,7 +132,10 @@ export default function Login() {
             </button>
             <p className="text-center text-gray-600 mt-4 text-sm">
               Don't have an account?{" "}
-              <button onClick={() => navigate('/signup')} className="text-blue-500 hover:underline  cursor-pointer">
+              <button
+                onClick={() => navigate("/signup")}
+                className="text-blue-500 hover:underline cursor-pointer"
+              >
                 Sign Up
               </button>
             </p>

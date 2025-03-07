@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 import NotFound from "./pages/NotFound";
-import AIDiagnose from "./pages/aidiagonise";
+import AIDiagnose from "./pages/AIDiagnose";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import LandingPage from "./pages/LandingPage";

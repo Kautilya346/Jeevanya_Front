@@ -1,74 +1,75 @@
-export default function LandingPage() {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        {/* Navigation Bar */}
-        <nav className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16 items-center">
-              <div className="flex-shrink-0">
-                <h1 className="text-2xl font-bold text-blue-600">JEEVANJA</h1>
-              </div>
-              <div className="hidden md:flex space-x-8">
-                <a href="#" className="text-gray-700 hover:text-blue-600">Home</a>
-                <a href="#" className="text-gray-700 hover:text-blue-600">About us</a>
-                <a href="#" className="text-gray-700 hover:text-blue-600">Contact us</a>
-                <a href="#" className="text-gray-700 hover:text-blue-600">Login</a>
-              </div>
-            </div>
-          </div>
-        </nav>
-  
-        {/* Hero Section */}
-        <div className="bg-blue-50 py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Empowering Lives Through Health
-            </h1>
-            <button className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg hover:bg-blue-700 transition-colors">
-              Get an appointment
+import React from "react";
+import Navbar from "../Components/Navbar";
+import { useNavigate } from "react-router-dom";
+import Consulting from "../Components/Consulting";
+
+const Jeevanya = () => {
+    const navigate = useNavigate();
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-[#C2E6FF] to-white p-6">
+      {/* Navbar */}
+      <Navbar/>
+
+      {/* Hero Section */}
+      <div className="bg-gradient-to-t from-[#D7EFFF] to-white rounded-4xl p-10 mt-10 shadow-md flex justify-between">
+        <div className="w-2/5">
+            <h2 className="text-5xl font-semibold text-gray-800">
+                Empowering Lives Through Health
+            </h2>
+            <button className="mt-20 px-4 py-2 border rounded-2xl flex items-center space-x-2 bg-white cursor-pointer hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
+                Get an appointment
             </button>
-          </div>
         </div>
-  
-        {/* Services Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Connect Card */}
-            <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold mb-4">Connect</h3>
-              <p className="text-gray-600">Connect with healthcare professionals and patients community.</p>
-            </div>
-  
-            {/* Profile Card */}
-            <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold mb-4">Profile</h3>
-              <p className="text-gray-600">Manage your health profile and medical records securely.</p>
-            </div>
-  
-            {/* Diagnosis Card */}
-            <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold mb-4">Diagnosis</h3>
-              <p className="text-gray-600">Get preliminary diagnosis and health recommendations.</p>
-            </div>
-  
-            {/* Forum Card */}
-            <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold mb-4">Forum</h3>
-              <p className="text-gray-600">Participate in health discussions and Q&A sessions.</p>
-            </div>
-  
-            {/* Additional Service Cards can be added here */}
-          </div>
+        <div className="grid grid-cols-2 gap-4  w-3/5 ">
+        <button 
+            onClick={() => navigate('/connect')} 
+            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
+            Connect
+        </button>
+
+        <button 
+            onClick={() => navigate('/diagnosis')} 
+            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
+            Diagnosis
+        </button>
+
+        <button 
+            onClick={() => navigate('/profile')} 
+            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
+            Profile
+        </button>
+
+        <button 
+            onClick={() => navigate('/forum')} 
+            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out">
+            Forum
+        </button>
         </div>
-  
-        {/* Footer */}
-        <footer className="bg-gray-800 text-white py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>© 2024 JEEVANJA. All rights reserved.</p>
-          </div>
-        </footer>
       </div>
-    );
-  }
+
+      {/* Consulting Section */}
+      <div className="mt-32"></div>
+      <Consulting/>
+
+      {/* Services Section */}
+      <div className="mt-12">
+        <h2 className="text-3xl font-semibold text-center">Our Services</h2>
+        <div className="grid grid-cols-3 gap-6 mt-6">
+          <div className="bg-gray-200 p-12 rounded-xl text-center text-black shadow-sm">
+            <span className="text-xl py-5">
+                personalized treatment plans & proactive alerts.
+            </span>
+          </div>
+          <div className="bg-blue-100 p-12 rounded-xl text-center shadow-sm text-black">
+            <span className="text-xl py-5">
+              Provide real-time access to medical records.
+            </span>
+          </div>
+          <div className="bg-gray-200 p-12 rounded-xl text-center shadow-sm text-black"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Jeevanya;

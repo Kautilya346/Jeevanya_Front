@@ -98,7 +98,7 @@ const AIDiagnose = () => {
                 - **Explain-Symptoms-Detected:** [Explanation]
                 - **Risk Level:** [Low / Moderate / High]
                 - **Confidence Score:** [Percentage]
-                - **Recommendation:** [Home remedy or medical advice]
+                - **Recommendation:** [Home remedy or medical advice or  diet and therapy plans]
                 - **Prescription:** [Medication or tablets name or medicine names ]
 
                 **Patient Details:**

@@ -40,13 +40,13 @@ export default function Login() {
             <div className="relative flex bg-gray-200 rounded-full p-1">
               <button
                 onClick={() => setUserType("doctor")}
-                className="relative px-6 py-2 rounded-full text-gray-700 z-10"
+                className="relative px-6 py-2 rounded-full text-gray-700 z-10 cursor-pointer"
               >
                 Doctor
               </button>
               <button
                 onClick={() => setUserType("patient")}
-                className="relative px-6 py-2 rounded-full text-gray-700 z-10"
+                className="relative px-6 py-2 rounded-full text-gray-700 z-10 cursor-pointer"
               >
                 Patient
               </button>
@@ -102,7 +102,7 @@ export default function Login() {
             </button>
             <p className="text-center text-gray-600 mt-4 text-sm">
               Don't have an account?{" "}
-              <button onClick={() => navigate('/signup')} className="text-blue-500 hover:underline">
+              <button onClick={() => navigate('/signup')} className="text-blue-500 hover:underline  cursor-pointer">
                 Sign Up
               </button>
             </p>

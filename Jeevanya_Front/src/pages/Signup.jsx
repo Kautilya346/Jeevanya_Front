@@ -128,7 +128,7 @@ export default function Signup() {
             </button>
             <p className="text-center text-gray-600 mt-4 text-sm">
               Already have an account?{" "}
-              <button onClick={() => navigate('/login')} className="text-blue-500 hover:underline">
+              <button onClick={() => navigate('/login')} className="text-blue-500 hover:underline cursor-pointer">
                 Login
               </button>
             </p>

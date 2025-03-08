@@ -9,6 +9,10 @@ import Contactdoctor from "./pages/contactdoctor";
 import { VideoCall } from "./Components/VideoCall";
 import CheckPatient from  "./pages/CheckPatient";
 import Footer from "./Components/Footer";
+=======
+import CheckPatient from "./pages/CheckPatient";
+import ReportPage from "./pages/ReportPage";
+>>>>>>> de7156c2f3779b905e048e4b1ebae10773ad4458
 
 function App() {
   return (

@@ -32,7 +32,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(endpoint, payload,{
-        withCredentials:true
+        withCredentials: true,
       });
       console.log("Login Successful:", response.data);
       navigate("/");

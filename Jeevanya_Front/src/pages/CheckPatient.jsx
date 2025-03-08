@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FcVideoCall } from "react-icons/fc";
 import Chat from "../Components/Chat";
 import axios from "axios";
 
 const CheckPatient = () => {
   const [userData, setUserData] = useState(null);
+  const [report, setReport] = useState(null);
+
+  const { reportID } = useParams();
+  console.log("dfyuweyd", reportID);
 
   const getProfile = async () => {
     try {
@@ -20,8 +24,22 @@ const CheckPatient = () => {
     }
   };
 
+  const getReport = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/report/getreportdoctor/${reportID}`,
+        { withCredentials: true }
+      );
+      console.log("ds", response.data.report);
+      setReport(response.data.report);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getProfile();
+    getReport();
   }, []);
 
   const navigate = useNavigate();
@@ -51,9 +69,9 @@ const CheckPatient = () => {
                 className="rounded-full"
               />
             </div>
-            {userData && (
+            {userData && report && (
               <div className="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center w-3xl">
-                <h2 className="text-2xl font-bold">{userData.name}</h2>
+                <h2 className="text-2xl font-bold">{report.patient.name}</h2>
                 <p className="text-gray-500">{userData.licenseNumber}</p>
               </div>
             )}
@@ -72,37 +90,24 @@ const CheckPatient = () => {
             </div>
           </div>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-          <div className="bg-white p-6 rounded-2xl shadow-md">
-            <h3 className="text-xl font-semibold mb-4">Past Medical History</h3>
-            <p>
-              The patient has a history of hypertension, diagnosed at the age of
-              45, managed with lisinopril. Diagnosed with Type 2 Diabetes Mellitus
-              at 50, controlled with metformin and lifestyle changes. They also
-              suffer from osteoarthritis and GERD, managed with NSAIDs and
-              omeprazole.
-            </p>
-          </div>
-          <div className="bg-white p-6 rounded-2xl shadow-md">
-            <h3 className="text-xl font-semibold mb-4">First Consultation</h3>
-            <p>
-              The patient presents for a routine check-up, mentioning knee pain
-              after long walks and mild heartburn after meals.
-            </p>
-          </div>
-        </div>
       </div>
 
-      <div className="bg-white p-6 rounded-2xl shadow-md mt-8">
-        <h3 className="text-xl font-semibold mb-4">Current Prescription</h3>
-        <ul className="list-disc pl-5">
-          <li>
-            Lisinopril 10 mg tablet - Take once daily for hypertension.
-            Dispense: 30 tablets, Refills: 2.
-          </li>
-          <li>Loratadine 10 mg tablet (over-the-counter)</li>
-        </ul>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full">
+        <div className="bg-white p-6 rounded-2xl shadow-md w-full">
+          <h3 className="text-xl font-semibold mb-4">Current Prescription</h3>
+          <ul className="list-disc pl-5">
+            <li>
+              {report ? report.medications : "No prescription available."}
+            </li>
+            <li>Loratadine 10 mg tablet (over-the-counter)</li>
+          </ul>
+        </div>
+        <div className="bg-white p-6 rounded-2xl shadow-md w-full">
+          <h3 className="text-xl font-semibold mb-4">Symptoms</h3>
+          <p>
+            {report ? report.symptoms : "No Symptoms details available."}
+          </p>
+        </div>
       </div>
 
       <div className="bg-white p-6 rounded-2xl shadow-md mt-8">
@@ -148,6 +153,12 @@ const CheckPatient = () => {
           </div>
         </>
       )}
+      <div className="bg-white p-6 rounded-2xl shadow-md mt-8 w-full">
+        <h3 className="text-xl font-semibold mb-4 w-full">Past Medical History</h3>
+        <p className="w-full">
+          {report ? report.patient.medicalHistory : "No medical history available."}
+        </p>
+      </div>
     </div>
   );
 };

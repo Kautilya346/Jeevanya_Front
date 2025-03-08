@@ -7,7 +7,6 @@ const Chat = ({receiver,sender}) => {
   const [newMessage, setNewMessage] = useState("");
     // const sender = "67cbe0d411cdd39989ad62c7"
     // const receiver = "67cc1f98018e5d2f186f36ed"
-    console.log("this is",receiver);
   useEffect(() => {
     // Fetch previous chat history
     axios.get(`http://localhost:3000/api/chat/${sender}/${receiver}`)

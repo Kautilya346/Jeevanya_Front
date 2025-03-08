@@ -14,6 +14,7 @@ import { Toaster } from "react-hot-toast";
 import ReportPage from "./pages/ReportPage";
 import Footer from "./Components/Footer";
 import UploadMedicalRecord from "./pages/UploadMedicalRecord";
+import DoctorProfile from "./pages/DoctorProfile";
 import Forum from "./pages/Forum";
 import Community from "./pages/Community";
 
@@ -33,9 +34,10 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/UserProfile" element={<UserProfile />} />
         <Route path="/userprofile" element={<UserProfile />} />
-        <Route path="/checkpatient" element={<CheckPatient />} />
+        <Route path="/checkpatient/:reportID" element={<CheckPatient />} />
         <Route path="/uploadmedicalrecord" element={<UploadMedicalRecord />} />
         <Route path="/reportpage/:reportId" element={<ReportPage />} />
+        <Route path="/doctorprofile" element={<DoctorProfile />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/videocall" element={<VideoCall />} />
         <Route path="*" element={<NotFound />} />

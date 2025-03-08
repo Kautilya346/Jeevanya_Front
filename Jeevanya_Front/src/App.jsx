@@ -9,6 +9,7 @@ import Contactdoctor from "./pages/contactdoctor";
 import { VideoCall } from "./Components/VideoCall";
 import CheckPatient from "./pages/CheckPatient";
 import ReportPage from "./pages/ReportPage";
+import Footer from "./Components/Footer";
 
 function App() {
   return (

@@ -2,71 +2,28 @@ import React from 'react';
 
 const HealthConsultation = () => {
   const specialties = [
-    {
-      title: "Period doubts or Pregnancy",
-      icon: (
-        "https://www.practostatic.com/consult/consult-home/symptoms_icon/coughing.png"
-      ),
-      cta: "CONSULT NOW"
-    },
-    {
-      title: "Acne, pimple or skin issues",
-      icon: (
-        "https://www.practostatic.com/consult/consult-home/symptoms_icon/coughing.png"
-      ),
-      cta: "CONSULT NOW"
-    },
-    {
-      title: "Cold, cough or fever",
-      icon: (
-        "https://www.practostatic.com/consult/consult-home/symptoms_icon/coughing.png"
-      ),
-      cta: "CONSULT NOW"
-    },
-    {
-      title: "Child not feeling well",
-      icon: (
-        "https://www.practostatic.com/consult/consult-home/symptoms_icon/coughing.png"
-      ),
-      cta: "CONSULT NOW"
-    },
-    {
-      title: "Depression or anxiety",
-      icon: (
-        "https://www.practostatic.com/consult/consult-home/symptoms_icon/coughing.png"
-      ),
-      cta: "CONSULT NOW"
-    }
+    "Period doubts or Pregnancy",
+    "Acne, pimple or skin issues",
+    "Cold, cough or fever",
+    "Child not feeling well",
+    "Depression or anxiety"
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row justify-between items-start mb-4">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-700">
-            Consult top doctors online for any health concern
-          </h1>
-          <p className="text-gray-600 mt-1">
-            Private online consultations with verified doctors in all specialists
-          </p>
-        </div>
-        <button className="mt-4 md:mt-0 border border-blue-400 text-blue-400 px-6 py-2 rounded-lg hover:bg-blue-50 transition-colors">
-          View All Specialities
-        </button>
-      </div>
+    <div className="max-w-4xl mx-auto p-6 text-center">
+      <h1 className="text-2xl font-bold text-gray-700 mb-2">Consult top doctors online</h1>
+      <p className="text-gray-600 mb-8">Private online consultations with verified doctors</p>
 
-      <div className="flex flex-wrap justify-center gap-12 mt-8">
-        {specialties.map((specialty, index) => (
-          <div key={index} className="flex flex-col items-center text-center">
-            <div className="w-24 h-24 mb-7">
-              <img src={specialty.icon} alt={specialty.title} />
-            </div>
-            <h3 className=" text-gray-700 mb-2 flex-wrap ">
-              {specialty.title}
-            </h3>
-            <button className="text-blue-400 text-sm font-medium hover:text-blue-500">
-              {specialty.cta}
-            </button>
+      <div className="flex flex-wrap justify-center gap-8">
+        {specialties.map((title, index) => (
+          <div key={index} className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md w-60">
+            <img
+              src="https://www.practostatic.com/consult/consult-home/symptoms_icon/coughing.png"
+              alt={title}
+              className="w-20 h-20 mb-4"
+            />
+            <h3 className="text-gray-700 text-sm mb-2 text-center">{title}</h3>
+            <button className="text-blue-500 text-xs font-semibold">CONSULT NOW</button>
           </div>
         ))}
       </div>

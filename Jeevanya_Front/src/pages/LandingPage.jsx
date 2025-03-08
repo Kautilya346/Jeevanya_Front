@@ -16,14 +16,24 @@ const Jeevanya = () => {
     {
       label: "Diagnosis",
       hoverText: "Get a medical diagnosis",
-      path: "/diagnosis",
+      path: "/aidiagnose",
     },
     {
       label: "Profile",
       hoverText: "View your health profile",
-      path: "/profile",
+      path: "/userprofile",
     },
     { label: "Forum", hoverText: "Join health discussions", path: "/forum" },
+    {
+      label: "Medical Records",
+      hoverText: "Upload your medical records and current precription ",
+      path: "/updateMedicalRecords",
+    },
+    {
+      label: "Report Page",
+      hoverText: "see your report page",
+      path: "/reportpage",
+    },
   ];
 
   return (
@@ -32,7 +42,6 @@ const Jeevanya = () => {
       className="min-h-screen bg-gradient-to-br from-[#E1F5FE] via-[#D4F1F4] to-[#FFFFFF] p-6"
     >
       {/* Navbar */}
-      <Navbar />
 
       {/* Hero Section */}
       <div className="bg-gradient-to-t from-[#EAF6FF] to-white rounded-4xl p-10 mt-10 shadow-md flex justify-between">
@@ -53,7 +62,7 @@ const Jeevanya = () => {
               onClick={() => navigate(item.path)}
               onMouseEnter={() => setHoverIndex(index)}
               onMouseLeave={() => setHoverIndex(null)}
-              className="glowing-button bg-white p-10 rounded-xl text-3xl font-semibold cursor-pointer transition duration-300 ease-in-out"
+              className="glowing-button bg-white p-10 rounded-xl text-3xl font-semibold cursor-pointer transition duration-800 ease-in-out"
             >
               {hoverIndex === index ? (
                 <span className="text-lg font-medium">{item.hoverText}</span>
@@ -83,7 +92,7 @@ const Jeevanya = () => {
               Provide real-time access to medical records.
             </span>
           </div>
-          <div className="bg-gray-200 p-12 rounded-xl text-center shadow-sm text-black"></div>
+          <div className="bg-gray-200 p-12 rounded-xl text-center shadow-sm text-black">Best results</div>
         </div>
       </div>
     </div>

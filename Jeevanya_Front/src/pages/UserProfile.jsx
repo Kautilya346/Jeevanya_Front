@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [reports, setReports] = useState([]);
   const appointments = [
@@ -26,6 +28,7 @@ const UserProfile = () => {
         "http://localhost:3000/api/report/getreportbyuser",
         { withCredentials: true }
       );
+      console.log("repolrts ",response)
       setReports(response.data);
     } catch (err) {
       console.log(err);
@@ -105,14 +108,29 @@ const UserProfile = () => {
           </div>
 
           {/* Previous Reports */}
+          {/* Previous Reports */}
           <div className="bg-white shadow-lg rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-4">Previous Reports</h2>
             {reports.map((report, index) => (
               <div
                 key={index}
-                className="bg-blue-50 p-4 rounded-lg flex justify-between items-center text-sm mb-2"
+                onClick={() => {
+                  navigate(`/reportpage/`+report._id);
+                }}
+                className="bg-blue-50 cursor-pointer p-4 rounded-lg flex justify-between items-center text-sm mb-2"
               >
-                {/* Report details... */}
+                <div>
+                  <p className="font-bold">Doctor</p>
+                  <p>{report.doctor.name}</p>
+                </div>
+                <div>
+                  <p className="font-bold">Date</p>
+                  <p>{report.date_of_creation.slice(0, 10)}</p>
+                </div>
+                <div>
+                  <p className="font-bold">Reason</p>
+                  <p>{report.symptoms}</p>
+                </div>
               </div>
             ))}
           </div>

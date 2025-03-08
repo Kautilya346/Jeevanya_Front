@@ -14,11 +14,12 @@ const ReportPage = () => {
     const fetchReport = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/report/getreport/67cbe50258a3d676892100c6`,
+          `http://localhost:3000/api/report/getreport/${reportId}`,
           {
             withCredentials: true,
           }
         );
+        console.log(response.data.report)
         setReport(response.data.report);
       } catch (err) {
         setError("Failed to fetch report");

@@ -19,7 +19,7 @@ const ReportPage = () => {
             withCredentials: true,
           }
         );
-        console.log(response.data.report)
+        console.log(response.data.report);
         setReport(response.data.report);
       } catch (err) {
         setError("Failed to fetch report");
@@ -39,38 +39,57 @@ const ReportPage = () => {
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white p-10">
       <h1 className="text-4xl font-bold mb-6">Report Details</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="space-y-6">
-          <div className="bg-white p-6 rounded-lg shadow-md col-span-1">
-            <div className="flex flex-col items-center">
-              <div className="w-32 h-32 bg-gray-300 rounded-full mb-4"></div>
-              <p
-                className={`text-red-600 font-bold ${
-                  report.status === "Completed"
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
-                {report.status}
+        <div className="grid grid-cols-2 gap-6">
+          <div className="space-y-6 col-span-1">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="flex flex-col items-center">
+                <div className="w-32 h-32 bg-gray-300 rounded-full mb-4"></div>
+                <p
+                  className={`text-red-600 font-bold ${
+                    report.status === "Completed"
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {report.status}
+                </p>
+                <h2 className="text-xl font-bold">
+                  {report.patient?.name || "Unknown"}
+                </h2>
+                <p className="text-gray-500">Did-{report.patient?._id}</p>
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-xl font-bold">Diagnosis</h2>
+              {report.medications.length > 0 ? (
+                report.medications.map((med, index) => <p key={index}>{med}</p>)
+              ) : (
+                <p>No prescribed medications</p>
+              )}
+            </div>
+            <div className="bg-blue-100 p-6 rounded-lg shadow-md">
+              <h2 className="text-xl font-bold">Current Prescription</h2>
+              <p>
+                {report.suggestions || "No consultation details available."}
               </p>
-              <h2 className="text-xl font-bold">
-                {report.patient?.name || "Unknown"}
-              </h2>
-              <p className="text-gray-500">Did-{report.patient?._id}</p>
             </div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md col-span-1">
-            <h2 className="text-xl font-bold">Current Prescription</h2>
-            {report.medications.length > 0 ? (
-              report.medications.map((med, index) => <p key={index}>{med}</p>)
-            ) : (
-              <p>No prescribed medications</p>
-            )}
-          </div>
-          <div className="bg-blue-100 p-6 rounded-lg shadow-md col-span-1">
-            <h2 className="text-xl font-bold">First Consultation</h2>
-            <p>{report.suggestions || "No consultation details available."}</p>
+          <div className="space-y-6 col-span-1">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-xl font-bold">Suggestions</h2>
+              <p>
+                {report.suggestions || "No consultation details available."}
+              </p>
+            </div>
+            <div className="bg-blue-100 p-6 rounded-lg shadow-md">
+              <h2 className="text-xl font-bold">Symptoms</h2>
+              <p>
+                {report.suggestions || "No consultation details available."}
+              </p>
+            </div>
           </div>
         </div>
+
         <div className="bg-white p-6 rounded-lg shadow-md col-span-2">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold">

@@ -56,7 +56,9 @@ export default function Signup() {
           initial={false}
           animate={{ x: userType === "patient" ? 0 : -20, opacity: 1 }}
           transition={transition}
-          className={`flex-1 ${userType === "patient" ? "order-first" : "order-last"}`}
+          className={`flex-1 ${
+            userType === "patient" ? "order-first" : "order-last"
+          }`}
         >
           <img src={userType === "patient" ? patient : doctor} alt="Signup" />
         </motion.div>
@@ -69,49 +71,161 @@ export default function Signup() {
         >
           <div className="flex justify-center gap-4 mb-6">
             <div className="relative flex bg-gray-200 rounded-full p-1">
-              <button onClick={() => { setUserType("doctor"); setStep(1); }} className="relative px-6 py-2 rounded-full text-gray-700 z-10 cursor-pointer">
+              <button
+                onClick={() => {
+                  setUserType("doctor");
+                  setStep(1);
+                }}
+                className="relative px-6 py-2 rounded-full text-gray-700 z-10 cursor-pointer"
+              >
                 Doctor
               </button>
-              <button onClick={() => setUserType("patient")} className="relative px-6 py-2 rounded-full text-gray-700 z-10 cursor-pointer">
+              <button
+                onClick={() => setUserType("patient")}
+                className="relative px-6 py-2 rounded-full text-gray-700 z-10 cursor-pointer"
+              >
                 Patient
               </button>
-              <motion.div layoutId="activeButton" className="absolute top-0 bottom-0 w-1/2 bg-[#4CC0BF] rounded-full" initial={false} animate={{ left: userType === "doctor" ? "0%" : "50%" }} transition={{ type: "spring", stiffness: 300, damping: 20 }} />
+              <motion.div
+                layoutId="activeButton"
+                className="absolute top-0 bottom-0 w-1/2 bg-[#4CC0BF] rounded-full"
+                initial={false}
+                animate={{ left: userType === "doctor" ? "0%" : "50%" }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              />
             </div>
           </div>
 
           {/* Step 1: Common for both Patients and Doctors */}
           {step === 1 && (
-            <motion.form onSubmit={(e) => { e.preventDefault(); userType === "patient" ? setStep(2) : handleSignup(e); }} initial={false} animate={{ x: 0, opacity: 1 }} transition={transition} className="bg-blue-50 p-6 rounded-lg shadow-md">
-              <h2 className="text-2xl font-bold mb-4 text-center">{userType === "patient" ? "Patient Registration" : "Doctor Registration"}</h2>
+            <motion.form
+              onSubmit={(e) => {
+                e.preventDefault();
+                userType === "patient" ? setStep(2) : handleSignup(e);
+              }}
+              initial={false}
+              animate={{ x: 0, opacity: 1 }}
+              transition={transition}
+              className="bg-blue-50 p-6 rounded-lg shadow-md"
+            >
+              <h2 className="text-2xl font-bold mb-4 text-center">
+                {userType === "patient"
+                  ? "Patient Registration"
+                  : "Doctor Registration"}
+              </h2>
               <div className="space-y-4">
-                <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required />
-                <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required />
-                <input type="text" name="phone_number" placeholder="Phone Number" value={formData.phone_number} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required />
-                <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Full Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                  required
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                  required
+                />
+                <input
+                  type="text"
+                  name="phone_number"
+                  placeholder="Phone Number"
+                  value={formData.phone_number}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                  required
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                  required
+                />
 
                 {userType === "patient" ? (
                   <>
-                    <input type="date" name="date_of_birth" value={formData.date_of_birth} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required />
-                    <select name="gender" value={formData.gender} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required>
-                      <option value="" disabled>Select Gender</option>
+                    <input
+                      type="date"
+                      name="date_of_birth"
+                      value={formData.date_of_birth}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                      required
+                    />
+                    <select
+                      name="gender"
+                      value={formData.gender}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                      required
+                    >
+                      <option value="" disabled>
+                        Select Gender
+                      </option>
                       <option value="male">Male</option>
-                      <option value="female">Female</option>
+                      <option value="female">Female</option>f
                       <option value="other">Other</option>
                     </select>
                   </>
                 ) : (
                   <>
-                    <input type="text" name="speciality" placeholder="Speciality" value={formData.speciality} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required />
-                    <input type="text" name="licenseNumber" placeholder="License Number" value={formData.licenseNumber} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required />
+                    <select
+                      name="speciality"
+                      value={formData.speciality}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                      required
+                    >
+                      <option value="" disabled>
+                        Select your Speciality
+                      </option>
+                      <option value="Cardiologist">Cardiologist</option>
+                      <option value="Dermatologist">Dermatologist</option>
+                      <option value="Neurologist">Neurologist</option>
+                      <option value="Orthopedic">Orthopedic</option>
+                      <option value="Gastroenterologist">
+                        Gastroenterologist
+                      </option>
+                      <option value="Pulmonologist">Pulmonologist</option>
+                      <option value="Endocrinologist">Endocrinologist</option>
+                      <option value="Oncologist">Oncologist</option>
+                      <option value="Psychiatrist">Psychiatrist</option>
+                      <option value="Ophthalmologist">Ophthalmologist</option>
+                    </select>
+                    <input
+                      type="text"
+                      name="licenseNumber"
+                      placeholder="License Number"
+                      value={formData.licenseNumber}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                      required
+                    />
                   </>
                 )}
               </div>
               {userType === "patient" ? (
-                <button type="button" onClick={() => setStep(2)} className="mt-6 w-full bg-[#4CC0BF] text-black py-2 rounded-lg font-bold hover:bg-[#3d7473] transition">
+                <button
+                  type="button"
+                  onClick={() => setStep(2)}
+                  className="mt-6 w-full bg-[#4CC0BF] text-black py-2 rounded-lg font-bold hover:bg-[#3d7473] transition"
+                >
                   Next
                 </button>
               ) : (
-                <button type="submit" className="mt-6 w-full bg-[#4CC0BF] text-black py-2 rounded-lg font-bold hover:bg-[#3d7473] transition">
+                <button
+                  type="submit"
+                  className="mt-6 w-full bg-[#4CC0BF] text-black py-2 rounded-lg font-bold hover:bg-[#3d7473] transition"
+                >
                   Sign Up
                 </button>
               )}
@@ -120,13 +234,45 @@ export default function Signup() {
 
           {/* Step 2: Only for Patients */}
           {step === 2 && userType === "patient" && (
-            <motion.form onSubmit={handleSignup} initial={false} animate={{ x: 0, opacity: 1 }} transition={transition} className="bg-blue-50 p-6 rounded-lg shadow-md">
-              <h2 className="text-2xl font-bold mb-4 text-center">Additional Medical Details</h2>
+            <motion.form
+              onSubmit={handleSignup}
+              initial={false}
+              animate={{ x: 0, opacity: 1 }}
+              transition={transition}
+              className="bg-blue-50 p-6 rounded-lg shadow-md"
+            >
+              <h2 className="text-2xl font-bold mb-4 text-center">
+                Additional Medical Details
+              </h2>
               <div className="space-y-4">
-                <input type="text" name="emergency_contact" placeholder="Emergency Contact" value={formData.emergency_contact} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required />
-                <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required />
-                <select name="blood_group" value={formData.blood_group} onChange={handleChange} className="w-full p-3 border rounded-lg bg-[#E3EAFF]" required>
-                  <option value="" disabled>Select Blood Group</option>
+                <input
+                  type="text"
+                  name="emergency_contact"
+                  placeholder="Emergency Contact"
+                  value={formData.emergency_contact}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                  required
+                />
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="Address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                  required
+                />
+                <select
+                  name="blood_group"
+                  value={formData.blood_group}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg bg-[#E3EAFF]"
+                  required
+                >
+                  <option value="" disabled>
+                    Select Blood Group
+                  </option>
                   <option value="A+">A+</option>
                   <option value="A-">A-</option>
                   <option value="B+">B+</option>
@@ -137,8 +283,19 @@ export default function Signup() {
                   <option value="O-">O-</option>
                 </select>
               </div>
-              <button type="button" onClick={() => setStep(1)} className="mt-6 w-full bg-[#4CC0BF] text-black py-2 rounded-lg font-bold hover:bg-[#3d7473] transition">Back</button>
-              <button type="submit" className="mt-6 w-full bg-[#4CC0BF] text-black py-2 rounded-lg font-bold hover:bg-[#3d7473] transition">Sign Up</button>
+              <button
+                type="button"
+                onClick={() => setStep(1)}
+                className="mt-6 w-full bg-[#4CC0BF] text-black py-2 rounded-lg font-bold hover:bg-[#3d7473] transition"
+              >
+                Back
+              </button>
+              <button
+                type="submit"
+                className="mt-6 w-full bg-[#4CC0BF] text-black py-2 rounded-lg font-bold hover:bg-[#3d7473] transition"
+              >
+                Sign Up
+              </button>
             </motion.form>
           )}
         </motion.div>

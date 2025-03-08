@@ -14,6 +14,7 @@ import { Toaster } from "react-hot-toast";
 import ReportPage from "./pages/ReportPage";
 import Footer from "./Components/Footer";
 import UploadMedicalRecord from "./pages/UploadMedicalRecord";
+import DoctorProfile from "./pages/DoctorProfile";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/checkpatient" element={<CheckPatient />} />
         <Route path="/uploadmedicalrecord" element={<UploadMedicalRecord />} />
         <Route path="/reportpage/:reportId" element={<ReportPage />} />
+        <Route path="/doctorprofile" element={<DoctorProfile />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/videocall" element={<VideoCall />} />
         <Route path="*" element={<NotFound />} />

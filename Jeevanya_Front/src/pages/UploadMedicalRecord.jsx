@@ -159,8 +159,8 @@ const UploadMedicalRecord = () => {
   };
 
   return (
-    <div>
-      <div className="flex max-w-6xl mx-auto p-6 bg-white shadow-xl rounded-xl">
+    <div className="p-6 my-6 bg-[#DDEBFE]">
+      <div className="flex max-w-6xl mx-auto  bg-white shadow-xl rounded-xl p-6">
         {/* Left Panel - Input Section */}
         <div className="w-1/2 pr-6 border-r-2 border-gray-100">
           <h2 className="text-2xl font-bold mb-6 text-blue-800">
@@ -209,7 +209,7 @@ const UploadMedicalRecord = () => {
             ))}
             <button
               onClick={addPrescriptionField}
-              className="text-blue-600 hover:text-blue-800 text-sm mt-2 flex items-center"
+              className="text-[blue-600] hover:text-blue-800 text-sm mt-2 flex items-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -233,7 +233,7 @@ const UploadMedicalRecord = () => {
             <button
               onClick={handleSummarize}
               disabled={loading}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 
+              className="bg-[#5398f8] text-white px-6 py-3 rounded-lg hover:bg-blue-500 
                      disabled:bg-gray-400 flex-1 transition-colors flex items-center justify-center"
             >
               {loading ? (
@@ -310,7 +310,7 @@ const UploadMedicalRecord = () => {
           {/* Doctor's Analysis */}
         </div>
       </div>
-      <div className="bg-white rounded-xl p-5 shadow-inner border border-gray-200">
+      <div className="bg-white rounded-xl p-5 shadow-inner border border-gray-200 m-6">
         <div className="flex items-center gap-2 mb-6">
           <svg
             xmlns="http://www.w3.org/2000/svg"

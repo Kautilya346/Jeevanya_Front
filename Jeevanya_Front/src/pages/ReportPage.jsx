@@ -79,7 +79,8 @@ const ReportPage = () => {
             </h2>
             <FcVideoCall
               className="text-[40px] hover:cursor-pointer"
-              onClick={() => navigate("/videocall")}
+              onClick={() => window.open("/videocall", "_blank") // Opens in a new tab
+              }
             />
           </div>
               <Chat receiver={report.doctor._id} sender={report.patient._id} />

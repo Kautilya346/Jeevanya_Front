@@ -26,12 +26,12 @@ const Jeevanya = () => {
     { label: "Forum", hoverText: "Join health discussions", path: "/forum" },
     {
       label: "Medical Records",
-      hoverText: "Upload your medical records and current precription ",
+      hoverText: "Upload your medical records and current prescription ",
       path: "/uploadmedicalrecord",
     },
     {
       label: "Report Page",
-      hoverText: "see your report page",
+      hoverText: "See Your Report Page",
       path: "/reportpage",
     },
   ];

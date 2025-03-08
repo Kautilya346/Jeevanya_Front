@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import axios from "axios"; // Import axios
+import axios from "axios";
 import doctor from "../assests/doctor.png";
 import patient from "../assests/patient.png";
 import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast"; // Import toast functionality
 
 export default function Login() {
   const [userType, setUserType] = useState("patient");
@@ -35,6 +36,9 @@ export default function Login() {
         withCredentials: true,
       });
       console.log("Login Successful:", response.data);
+      
+      // Show success toast
+      toast.success(`${userType === "patient" ? "Patient" : "Doctor"} login successful!`);
 
       // Redirect based on user type
       if (userType === "patient") {
@@ -43,12 +47,19 @@ export default function Login() {
         navigate("/"); // Redirect doctor to their dashboard or profile
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      // const errorMessage = err.response?.data?.message || "Login failed";
+      // setError(errorMessage);
+      
+      // Show error toast
+      toast.error("Login Failed");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#C2E6FF] to-[#FFFFFF] p-6">
+      {/* Add Toaster component */}
+      {/* <Toaster position="top-right" /> */}
+      
       <div className="bg-gradient-to-b from-[#D7EFFF] to-[#FFFFFF] shadow-xl rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 max-w-4xl w-full">
         {/* Image Container */}
         <motion.div

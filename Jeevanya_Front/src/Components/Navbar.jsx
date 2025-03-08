@@ -30,10 +30,10 @@ export default function Navbar() {
           About us
         </button>
         <button
-          onClick={() => navigate("/contactus")}
+          onClick={() => navigate("/userprofile")}
           className="font-bold text-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
         >
-          Contact us
+          Profile
         </button>
         <button
           onClick={() => navigate("/login")}

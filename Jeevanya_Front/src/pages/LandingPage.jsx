@@ -80,22 +80,13 @@ const Jeevanya = () => {
       hoverText: "Get a medical diagnosis",
       path: "/aidiagnose",
     },
-    {
-      label: "Profile",
-      hoverText: "View your health profile",
-      path: "/userprofile",
-    },
     { label: "Forum", hoverText: "Join health discussions", path: "/forum" },
     {
-      label: "Upadate Medical Record",
+      label: "Update Medical Record",
       hoverText: "Upload your medical records and current prescription",
       path: "/uploadmedicalrecord",
     },
-    {
-      label: "Report Page",
-      hoverText: "See Your Report Page",
-      path: "/reportpage",
-    },
+    ,
   ];
 
   const services = [

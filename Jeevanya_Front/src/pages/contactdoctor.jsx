@@ -73,7 +73,7 @@ const ContactDoctor = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#C2E6FF] to-[#FFFFFF] p-6">
-      <div className="bg-gradient-to-b from-[#cfeafb] to-[#FFFFFF] shadow-xl rounded-2xl p-8 max-w-3xl w-full">
+      <div className="bg- [#FFFFFF] shadow-xl rounded-2xl p-8 max-w-3xl w-full">
         <motion.h1 className="text-5xl font-bold mb-6 text-[#4CC0BF] text-center">
           Find the Right Doctor
         </motion.h1>

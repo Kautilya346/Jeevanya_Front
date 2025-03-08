@@ -7,6 +7,7 @@ const ConsultDoctor = () => {
   const location = useLocation();
   const doctor = location.state?.doctor;
   const [symptoms, setSymptoms] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSendReport = async () => {
     if (!symptoms.trim()) {
@@ -14,6 +15,7 @@ const ConsultDoctor = () => {
       return;
     }
 
+    setIsSubmitting(true);
     try {
       const response = await axios.post(
         "http://localhost:3000/api/report/setFirstReport",
@@ -28,80 +30,113 @@ const ConsultDoctor = () => {
 
       console.log("Report Sent:", response.data);
       toast.success("Report sent successfully!");
+      setSymptoms("");
     } catch (error) {
       console.error(
         "Error sending report:",
         error.response?.data || error.message
       );
       toast.error("Failed to send report. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
+  if (!doctor) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100">
+        <div className="bg-white p-8 rounded-xl shadow-lg">
+          <p className="text-red-500 text-center text-lg font-medium">
+            No doctor selected. Please go back and select a doctor.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 p-6">
-      <div className="max-w-6xl w-full bg-white shadow-2xl rounded-xl p-8">
-        {doctor ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Left Side - Doctor Details */}
-            <div className="p-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md">
-              <h1 className="text-3xl font-bold text-blue-700 mb-4 text-center">
-                Consult Doctor
-              </h1>
-              <div className="flex flex-col items-center">
-                <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-2xl font-semibold text-white">
-                  {doctor.name.charAt(0)}
-                </div>
-                <h2 className="text-2xl font-semibold text-gray-900 mt-4">
-                  {doctor.name}
-                </h2>
-                <p className="text-lg text-blue-600 font-medium">
-                  {doctor.speciality}
-                </p>
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 py-12 px-4 sm:px-6">
+      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-[#4CC0BF] py-6 px-8">
+          <h1 className="text-2xl font-bold text-white">
+            Medical Consultation
+          </h1>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+          {/* Doctor Profile */}
+          <div className="col-span-1 p-6 bg-blue-50">
+            <div className="flex flex-col items-center mb-6">
+              <div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center text-2xl font-bold text-white mb-4">
+                {doctor.name.charAt(0)}
               </div>
-              <div className="mt-4 space-y-2">
-                <p className="text-sm text-gray-700">
-                  <strong>Gender:</strong> {doctor.gender}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <strong>License:</strong> {doctor.licenseNumber}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <strong>Hospital ID:</strong> {doctor.hospitalId || "N/A"}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <strong>Email:</strong> {doctor.email}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <strong>Contact:</strong> {doctor.phone_number}
-                </p>
+              <h2 className="text-xl font-bold text-gray-800">
+                Dr. {doctor.name}
+              </h2>
+              <p className="text-[#4CC0BF] font-medium mt-1">{doctor.speciality}</p>
+            </div>
+            
+            <div className="space-y-3 bg-white p-4 rounded-lg shadow-sm">
+              <div className="flex justify-between border-b border-gray-100 pb-2">
+                <span className="text-gray-500">Gender</span>
+                <span className="font-medium text-gray-800">{doctor.gender}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-100 pb-2">
+                <span className="text-gray-500">License No.</span>
+                <span className="font-medium text-gray-800">{doctor.licenseNumber}</span>
+              </div>
+              {doctor.hospitalId && (
+                <div className="flex justify-between border-b border-gray-100 pb-2">
+                  <span className="text-gray-500">Hospital ID</span>
+                  <span className="font-medium text-gray-800">{doctor.hospitalId}</span>
+                </div>
+              )}
+              <div className="flex justify-between border-b border-gray-100 pb-2">
+                <span className="text-gray-500">Email</span>
+                <span className="font-medium text-gray-800 break-all">{doctor.email}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-500">Contact</span>
+                <span className="font-medium text-gray-800">{doctor.phone_number}</span>
               </div>
             </div>
+          </div>  
 
-            {/* Right Side - Symptoms Input */}
-            <div className="p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-md flex flex-col">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                Describe Your Symptoms
-              </h2>
+          {/* Symptoms Form */}
+          <div className="col-span-2 p-8">
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              Describe Your Symptoms
+            </h2>
+            <div className="mb-6">
+              <label htmlFor="symptoms" className="block text-sm font-medium text-gray-700 mb-2">
+                Please provide detailed information about your symptoms
+              </label>
               <textarea
-                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                rows="6"
-                placeholder="Write your symptoms here..."
+                id="symptoms"
+                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-[200px] transition duration-200"
+                placeholder="Describe when your symptoms started, their severity, any triggers, and how they affect your daily activities..."
                 value={symptoms}
                 onChange={(e) => setSymptoms(e.target.value)}
               ></textarea>
+              <p className="mt-2 text-sm text-gray-500">
+                Your information will be shared securely with Dr. {doctor.name}.
+              </p>
+            </div>
+            <div className="flex justify-end">
               <button
                 onClick={handleSendReport}
-                className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+                disabled={isSubmitting}
+                className={`px-6 py-3 rounded-lg text-white font-medium transition duration-300 ${
+                  isSubmitting
+                    ? "bg-blue-400 cursor-not-allowed"
+                    : "bg-[#4CC0BF] hover:bg-blue-700 shadow-md hover:shadow-lg"
+                }`}
               >
-                Send Report
+                {isSubmitting ? "Sending..." : "Send Report"}
               </button>
             </div>
           </div>
-        ) : (
-          <p className="text-red-500 text-center text-lg">
-            No doctor selected.
-          </p>
-        )}
+        </div>
       </div>
     </div>
   );

@@ -60,10 +60,14 @@ const AIDiagnose = () => {
     }
   };
   const extractRecommendation = (text) => {
-    const match = text.match(/\*\*Recommendation:\*\*(.*?)- \*\*Prescription:\*\*/s);
-    console.log("kaut",match[1].replace(/\*/g, "").replace(/\n/g, " ").trim())
-    return match ? match[1].replace(/\*/g, "").replace(/\n/g, " ").trim() : "No recommendation found";
-};
+    const match = text.match(
+      /\*\*Recommendation:\*\*(.*?)- \*\*Prescription:\*\*/s
+    );
+    console.log("kaut", match[1].replace(/\*/g, "").replace(/\n/g, " ").trim());
+    return match
+      ? match[1].replace(/\*/g, "").replace(/\n/g, " ").trim()
+      : "No recommendation found";
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -138,7 +142,7 @@ const AIDiagnose = () => {
         data.candidates?.[0]?.content?.parts?.[0]?.text ||
         "No diagnosis available.";
 
-        console.log(aiResponse);
+      console.log(aiResponse);
 
       const diagnosisMatch = aiResponse.match(/\*\*Diagnosis:\*\* (.+)/);
       const riskLevelMatch = aiResponse.match(/\*\*Risk Level:\*\* (.+)/);
@@ -149,7 +153,7 @@ const AIDiagnose = () => {
         /\*\*Explain-Symptoms-Detected:\*\* (.+)/
       );
       const recommendationMatch = extractRecommendation(aiResponse);
-    
+
       const prescriptionMatch = aiResponse.match(/\*\*Prescription:\*\* (.+)/);
 
       setFormData((prevData) => ({
@@ -188,15 +192,13 @@ const AIDiagnose = () => {
     const match = text.match(/\*\*Prescription:\*\* (.+)/);
     return match ? match[1] : "Unknown";
   };
- 
-//console.log(()=>{extractRecommendation(aiResponse)});
 
-
+  //console.log(()=>{extractRecommendation(aiResponse)});
 
   return (
     <div className="min-h-screen bg-slate-100 py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#E1F5FE]  to-[#FFFFFF]">
       <h1
-        className="text-3xl text-center mb-7 font-bold text-[#3498DB] cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
+        className="text-3xl text-center mb-7 font-bold text-[#3498DB] cursor-pointer hover:scale-110 transition duration-300 ease-in-out tracking-widest"
         style={{ fontFamily: "Pixelcraft, sans-serif" }}
       >
         Dhanvantari AI

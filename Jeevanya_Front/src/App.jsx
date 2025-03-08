@@ -30,8 +30,8 @@ function App() {
         <Route path="/UserProfile" element={<UserProfile />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/checkpatient" element={<CheckPatient />} />
-        <Route path="/reportpage" element={<ReportPage />} />
         <Route path="/uploadmedicalrecord" element={<UploadMedicalRecord />} />
+        <Route path="/reportpage/:reportId" element={<ReportPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/videocall" element={<VideoCall />} />
         <Route path="*" element={<NotFound />} />

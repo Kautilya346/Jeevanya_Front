@@ -1,6 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FcVideoCall } from "react-icons/fc";
 
 const CheckPatient = () => {
+
+  const navigate = useNavigate();
   return (
     <div className="bg-gradient-to-b from-blue-100 to-blue-200 min-h-screen p-8">
       <h1 className="text-4xl font-bold mb-8">Patient Details</h1>
@@ -54,8 +58,12 @@ const CheckPatient = () => {
 
       {/* Chat Section */}
       <div className="bg-white p-6 rounded-2xl shadow-md mt-8">
-        <h3 className="text-xl font-semibold mb-4">Chat with <span className="font-bold">Junn Jaas</span></h3>
-        <p className="text-gray-400">(Chat section placeholder)</p>
+        <h3 className="text-xl font-semibold mb-4">Contact Doctor<span className="font-bold">Junn Jaas</span></h3>
+        <FcVideoCall className='text-[50px] hover:cursor-pointer'
+          onClick={()=>{
+          navigate('/videocall')
+          }}
+        />
       </div>
     </div>
   );

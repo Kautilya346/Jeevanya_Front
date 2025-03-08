@@ -25,7 +25,7 @@ const Jeevanya = () => {
         </div>
         <div className="grid grid-cols-2 gap-4 w-3/5">
           <button
-            onClick={() => navigate("/connect")}
+            onClick={() => navigate("/contactdoctor")}
             className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out"
           >
             Connect

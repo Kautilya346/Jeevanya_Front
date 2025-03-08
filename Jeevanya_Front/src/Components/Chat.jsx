@@ -7,7 +7,6 @@ const Chat = ({receiver,sender}) => {
   const [newMessage, setNewMessage] = useState("");
     // const sender = "67cbe0d411cdd39989ad62c7"
     // const receiver = "67cc1f98018e5d2f186f36ed"
-    console.log("this is",receiver);
   useEffect(() => {
     // Fetch previous chat history
     axios.get(`http://localhost:3000/api/chat/${sender}/${receiver}`)
@@ -15,6 +14,7 @@ const Chat = ({receiver,sender}) => {
 
     // Listen for new messages
     socket.on("receiveMessage", (message) => {
+      console.log("hua")
       setMessages((prev) => [...prev, message]);
     });
 
@@ -38,8 +38,8 @@ const Chat = ({receiver,sender}) => {
           key={index}
           className={`p-3 rounded-lg max-w-[50%] mb-3 ${
             msg.sender === sender
-              ? "ml-auto bg-blue-200 border-2 border-gray-500 text-gray-800" // Sender's message
-              : "mr-auto bg-white border border-blue-100 text-gray-800" // Receiver's message
+              ? "ml-auto bg-blue-400 border-2 border-black text-gray-800" // Sender's message
+              : "mr-auto bg-blue-100 border-2 border-black text-gray-800" // Receiver's message
           }`}
         >
           {msg.message}

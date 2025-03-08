@@ -6,8 +6,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-800 w-[100%] text-white py-12">
-      <div className="container mx-auto px-6">
+    <footer className="bg-gray-800 w-full text-white py-12">
+      <div className="max-w-screen-xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
           {/* Logo and Company Info */}
           <div className="mb-8 md:mb-0 text-center md:text-left">

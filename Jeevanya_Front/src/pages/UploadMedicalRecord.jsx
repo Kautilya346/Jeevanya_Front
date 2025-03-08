@@ -170,7 +170,7 @@ const UploadMedicalRecord = () => {
           content: contentParts.join(":").trim(),
         };
       });
-
+      setPatientkisummary(patientSection);
       setSummary({
         patient: patientSection || "No patient summary available",
         doctor: formattedDoctor || [],
@@ -189,6 +189,39 @@ const UploadMedicalRecord = () => {
     setFilePreview(null);
     setPrescriptions([""]);
     setSummary({ patient: "", doctor: [] });
+  };
+
+  const [translatedPatientSummary, setTranslatedPatientSummary] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+  const [patientkisummary, setPatientkisummary] = useState("");
+  const handleTranslate = async (language) => {
+    if (!summary.patient) {
+      toast.error("No patient summary to translate");
+      return;
+    }
+
+    try {
+      setIsTranslating(true);
+      setSelectedLanguage(language);
+      setShowLanguageDropdown(false);
+
+      const prompt = `Translate this medical summary to ${language} while keeping medical terms accurate. Maintain the original structure and formatting:\n\n${patientkisummary}`;
+
+      const response = await axios.post(API_URL, {
+        contents: [{ parts: [{ text: prompt }] }],
+      });
+
+      const translatedText =
+        response?.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      setTranslatedPatientSummary(translatedText);
+    } catch (error) {
+      console.error("Translation error:", error);
+      toast.error("Translation failed. Please try again.");
+    } finally {
+      setIsTranslating(false);
+    }
   };
 
   return (
@@ -337,6 +370,85 @@ const UploadMedicalRecord = () => {
             </div>
             <div className="whitespace-pre-wrap text-gray-800 leading-relaxed">
               {summary.patient || "Patient summary will appear here..."}
+            </div>
+            <div className="mt-4">
+              <div className="relative inline-block">
+                <button
+                  onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+                  disabled={!summary.patient}
+                  className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg hover:bg-blue-200 
+                 flex items-center gap-2 text-sm disabled:opacity-50"
+                >
+                  {isTranslating ? (
+                    <>
+                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                        {/* Spinner SVG */}
+                      </svg>
+                      Translating...
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+                        />
+                      </svg>
+                      Translate Summary
+                    </>
+                  )}
+                </button>
+
+                {showLanguageDropdown && (
+                  <div className="absolute z-10 mt-2 w-48 bg-white rounded-lg shadow-xl border">
+                    <button
+                      onClick={() => handleTranslate("Hindi")}
+                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 text-left"
+                    >
+                      हिन्दी (Hindi)
+                    </button>
+                    <button
+                      onClick={() => handleTranslate("Gujarati")}
+                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 text-left"
+                    >
+                      ગુજરાતી (Gujarati)
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {translatedPatientSummary && (
+                <div className="mt-4 p-3 bg-white rounded-lg border border-blue-200">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-gray-600">
+                      Translated to {selectedLanguage}
+                    </span>
+                    <button
+                      onClick={() => setTranslatedPatientSummary("")}
+                      className="text-blue-600 hover:text-blue-800 text-sm"
+                    >
+                      Show Original
+                    </button>
+                  </div>
+                  <div className="whitespace-pre-wrap text-gray-800">
+                    {translatedPatientSummary}
+                  </div>
+                </div>
+              )}
+            </div>
+            // Update the Patient Summary display to:
+            <div className="whitespace-pre-wrap text-gray-800 leading-relaxed">
+              {translatedPatientSummary ||
+                summary.patient ||
+                "Patient summary will appear here..."}
             </div>
           </div>
 

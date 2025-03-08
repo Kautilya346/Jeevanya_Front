@@ -11,7 +11,12 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+<<<<<<< HEAD
     "@stream-io/video-react-sdk": "^1.12.6",
+=======
+    "@mui/icons-material": "^6.4.7",
+    "@mui/styled-engine": "^6.4.6",
+>>>>>>> 2e51fe6e1406199770ea826dcd09581a30ae9dc7
     "@tailwindcss/vite": "^4.0.12",
     "axios": "^1.8.2",
     "framer-motion": "^12.4.10",

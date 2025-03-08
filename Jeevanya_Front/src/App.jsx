@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import LandingPage from "./pages/LandingPage";
 import Contactdoctor from "./pages/contactdoctor";
 import { VideoCall } from "./Components/VideoCall";
+import CheckPatient from  "./pages/CheckPatient";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/aidiagnose" element={<AIDiagnose />} />
         <Route path="/contactdoctor" element={<Contactdoctor />} />
         <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/checkpatient" element={<CheckPatient />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/videocall" element={<VideoCall />} />
       </Routes>

@@ -29,7 +29,7 @@ const Jeevanya = () => {
     {
       label: "Medical Records",
       hoverText: "Upload your medical records and current precription ",
-      path: "/updateMedicalRecords",
+      path: "/uploadmedicalrecord",
     },
     {
       label: "Report Page",

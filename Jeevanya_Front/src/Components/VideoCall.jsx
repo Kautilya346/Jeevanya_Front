@@ -1,17 +1,25 @@
-import { useEffect, useState } from 'react'; // Add useEffect and useState
-import { CallingState, StreamCall, StreamVideo, StreamVideoClient, useCall, useCallStateHooks } from '@stream-io/video-react-sdk';
-import { ParticipantView } from '@stream-io/video-react-sdk';
+import { useEffect, useState } from "react"; // Add useEffect and useState
+import {
+  CallingState,
+  StreamCall,
+  StreamVideo,
+  StreamVideoClient,
+  useCall,
+  useCallStateHooks,
+} from "@stream-io/video-react-sdk";
+import { ParticipantView } from "@stream-io/video-react-sdk";
 
-const apiKey = 'mmhfdzb5evj2';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3Byb250by5nZXRzdHJlYW0uaW8iLCJzdWIiOiJ1c2VyL0RhcnRoX05paGlsdXMiLCJ1c2VyX2lkIjoiRGFydGhfTmloaWx1cyIsInZhbGlkaXR5X2luX3NlY29uZHMiOjYwNDgwMCwiaWF0IjoxNzQxNDAzNzcyLCJleHAiOjE3NDIwMDg1NzJ9.iLJupJXeYD-bU1NdGGeib4qZ_0XyWXqTJiBxurUo5As';
-const userId = 'Darth_Nihilus';
-const callId = '3NtKfkrBkSHa';
+const apiKey = "mmhfdzb5evj2";
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3Byb250by5nZXRzdHJlYW0uaW8iLCJzdWIiOiJ1c2VyL0RhcnRoX05paGlsdXMiLCJ1c2VyX2lkIjoiRGFydGhfTmloaWx1cyIsInZhbGlkaXR5X2luX3NlY29uZHMiOjYwNDgwMCwiaWF0IjoxNzQxNDAzNzcyLCJleHAiOjE3NDIwMDg1NzJ9.iLJupJXeYD-bU1NdGGeib4qZ_0XyWXqTJiBxurUo5As";
+const userId = "Darth_Nihilus";
+const callId = "3NtKfkrBkSHa";
 
 // Set up the user object
 const user = {
   id: userId,
-  name: 'James',
-  image: 'https://getstream.io/random_svg/?id=oliver&name=Oliver',
+  name: "James",
+  image: "https://getstream.io/random_svg/?id=oliver&name=Oliver",
 };
 
 export function VideoCall() {
@@ -21,23 +29,24 @@ export function VideoCall() {
   useEffect(() => {
     // Initialize the client and call
     const newClient = new StreamVideoClient({ apiKey, user, token });
-    const newCall = newClient.call('default', callId);
+    const newCall = newClient.call("default", callId);
 
     // Join the call
-    newCall.join({ create: true })
+    newCall
+      .join({ create: true })
       .then(() => {
         setClient(newClient);
         setCall(newCall);
       })
       .catch((err) => {
-        console.error('Failed to join the call', err);
+        console.error("Failed to join the call", err);
       });
 
     // Cleanup on unmount
     return () => {
       if (newCall) {
         newCall.leave().catch((err) => {
-          console.error('Failed to leave the call', err);
+          console.error("Failed to leave the call", err);
         });
       }
       if (newClient) {
@@ -61,7 +70,8 @@ export function VideoCall() {
 
 export const MyUI = () => {
   const call = useCall();
-  const { useCallCallingState, useParticipants, useLocalParticipant } = useCallStateHooks();
+  const { useCallCallingState, useParticipants, useLocalParticipant } =
+    useCallStateHooks();
   const callingState = useCallCallingState();
   const participants = useParticipants();
   const localParticipant = useLocalParticipant();
@@ -109,13 +119,13 @@ export const MyUI = () => {
           onClick={toggleAudio}
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
         >
-          {localParticipant?.audioStream ? 'Mute' : 'Unmute'}
+          {localParticipant?.audioStream ? "Mute" : "Unmute"}
         </button>
         <button
           onClick={toggleVideo}
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
         >
-          {localParticipant?.videoStream ? 'Turn Video Off' : 'Turn Video On'}
+          {localParticipant?.videoStream ? "Turn Video Off" : "Turn Video On"}
         </button>
         <button
           onClick={endCall}
@@ -124,6 +134,6 @@ export const MyUI = () => {
           End Call
         </button>
       </div>
-    </div>
-  );
+    </div>
+  );
 };

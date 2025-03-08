@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FcVideoCall } from "react-icons/fc";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import Chat from "../Components/Chat";
 
 const ReportPage = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const ReportPage = () => {
             withCredentials: true,
           }
         );
-        console.log(response.data.report);
+        console.log(response.data)
         setReport(response.data.report);
       } catch (err) {
         setError("Failed to fetch report");
@@ -91,18 +92,16 @@ const ReportPage = () => {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-md col-span-2">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center pb-2">
             <h2 className="text-xl font-bold">
-              Chat with{" "}
-              <span className="text-gray-500">
-                {report.patient?.name || "Patient"}
-              </span>
+              Connect with Doctor
             </h2>
             <FcVideoCall
-              className="text-[50px] hover:cursor-pointer"
+              className="text-[40px] hover:cursor-pointer"
               onClick={() => navigate("/videocall")}
             />
           </div>
+              <Chat receiver={report.doctor._id} sender={report.patient._id} />
         </div>
       </div>
     </div>

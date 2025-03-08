@@ -91,11 +91,11 @@ const Jeevanya = () => {
       hoverText: "Upload your medical records and current prescription",
       path: "/uploadmedicalrecord",
     },
-    // {
-    //   label: "Report Page",
-    //   hoverText: "see your report page",
-    //   path: "/reportpage",
-    // },
+    {
+      label: "Report Page",
+      hoverText: "See Your Report Page",
+      path: "/reportpage",
+    },
   ];
 
   const services = [

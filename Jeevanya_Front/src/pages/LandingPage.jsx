@@ -93,7 +93,7 @@ const Jeevanya = () => {
     },
     {
       label: "Report Page",
-      hoverText: "see your report page",
+      hoverText: "See Your Report Page",
       path: "/reportpage",
     },
   ];

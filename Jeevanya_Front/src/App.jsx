@@ -27,6 +27,7 @@ function App() {
         <Route path="/aidiagnose" element={<AIDiagnose />} />
         <Route path="/contactdoctor" element={<Contactdoctor />} />
         <Route path="/consultdoctor" element={<ConsultDoctor />} />
+
         <Route path="/UserProfile" element={<UserProfile />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/checkpatient" element={<CheckPatient />} />

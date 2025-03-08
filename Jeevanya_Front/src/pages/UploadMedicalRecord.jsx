@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Tesseract from "tesseract.js";
+import toast from "react-hot-toast";
 
 const UploadMedicalRecord = () => {
   const [file, setFile] = useState(null);
@@ -126,9 +127,41 @@ const UploadMedicalRecord = () => {
         ?.trim();
 
       const doctorContent = rawText.split("**Doctor's Analysis**")[1]?.trim();
+      console.log(doctorContent);
+      async function sendDoctorContentToBackend() {
+        try {
+          const response = await axios.post(
+            `http://localhost:3000/api/patient/setmedicalrecord`,
+            {
+              medicalHistory: doctorContent, // Sending the doctor content as part of the medical history
+            },
+            {
+              withCredentials: true,
+            }
+          );
+
+          toast.success("Medical history updated successfully!");
+          // alert("Medical history updated successfully:", response.data);
+        } catch (error) {
+          if (error.response) {
+            // The request was made and the server responded with a status code outside the 2xx range
+            console.error(
+              "Error updating medical history:",
+              error.response.data.message
+            );
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.error("No response received:", error.request);
+          } else {
+            // Something else triggered the error
+            toast.error("Error:", error.message);
+          }
+        }
+      }
+
+      sendDoctorContentToBackend();
 
       const doctorSections = doctorContent.split(/\d+\.\s+/).slice(1);
-    
 
       const formattedDoctor = doctorSections.map((section) => {
         const [titlePart, ...contentParts] = section.split(":");
@@ -159,8 +192,8 @@ const UploadMedicalRecord = () => {
   };
 
   return (
-    <div>
-      <div className="flex max-w-6xl mx-auto p-6 bg-white shadow-xl rounded-xl">
+    <div className="p-6 my-6 bg-[#DDEBFE]">
+      <div className="flex max-w-6xl mx-auto  bg-white shadow-xl rounded-xl p-6">
         {/* Left Panel - Input Section */}
         <div className="w-1/2 pr-6 border-r-2 border-gray-100">
           <h2 className="text-2xl font-bold mb-6 text-blue-800">
@@ -209,7 +242,7 @@ const UploadMedicalRecord = () => {
             ))}
             <button
               onClick={addPrescriptionField}
-              className="text-blue-600 hover:text-blue-800 text-sm mt-2 flex items-center"
+              className="text-[blue-600] hover:text-blue-800 text-sm mt-2 flex items-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -233,7 +266,7 @@ const UploadMedicalRecord = () => {
             <button
               onClick={handleSummarize}
               disabled={loading}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 
+              className="bg-[#5398f8] text-white px-6 py-3 rounded-lg hover:bg-blue-500 
                      disabled:bg-gray-400 flex-1 transition-colors flex items-center justify-center"
             >
               {loading ? (
@@ -310,7 +343,7 @@ const UploadMedicalRecord = () => {
           {/* Doctor's Analysis */}
         </div>
       </div>
-      <div className="bg-white rounded-xl p-5 shadow-inner border border-gray-200">
+      <div className="bg-white rounded-xl p-5 shadow-inner border border-gray-200 m-6">
         <div className="flex items-center gap-2 mb-6">
           <svg
             xmlns="http://www.w3.org/2000/svg"

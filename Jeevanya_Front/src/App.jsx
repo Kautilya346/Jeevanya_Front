@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import LandingPage from "./pages/LandingPage";
 import Contactdoctor from "./pages/contactdoctor";
+import { VideoCall } from "./Components/VideoCall";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/contactdoctor" element={<Contactdoctor />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/videocall" element={<VideoCall />} />
       </Routes>
     </Router>
   );

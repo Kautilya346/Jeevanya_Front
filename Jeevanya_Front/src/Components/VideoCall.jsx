@@ -11,11 +11,7 @@ const callId = '3NtKfkrBkSHa';
 const user = {
   id: userId,
   name: 'James',
-<<<<<<< HEAD
   image: '',
-=======
-  image: 'https://getstream.io/random_svg/?id=oliver&name=Oliver',
->>>>>>> 0f76f250ba92e73bfa1a7e1a46685ec273dcf4e4
 };
 
 export function VideoCall() {

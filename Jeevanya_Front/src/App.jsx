@@ -8,6 +8,7 @@ import LandingPage from "./pages/LandingPage";
 import Contactdoctor from "./pages/contactdoctor";
 import { VideoCall } from "./Components/VideoCall";
 import CheckPatient from  "./pages/CheckPatient";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/videocall" element={<VideoCall />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

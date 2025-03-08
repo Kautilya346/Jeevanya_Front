@@ -26,14 +26,13 @@ const DoctorProfile = () => {
             "http://localhost:3000/api/report/getpatients",
             {withCredentials: true}
         )
-        console.log("uncle ",response.data)
+        // console.log("uncle ",response.data)
         setPatients(response.data.report)
+        console.log(response.data.report)
     }catch(err){
         console.log(err)
     }
     }
-
-
 
   useEffect(() => {
     docprofile();
@@ -99,15 +98,23 @@ const DoctorProfile = () => {
                   <div className="bg-sky-100 rounded-lg p-6 h-full">
                     <h4 className="text-center text-lg font-medium mb-4">Diagnosis</h4>
                     <div className="mb-4 border h-28 rounded-2xl text-center">
-                        {patient.patient.diagnosis || "Not yet diagnosed"}
+                        {patient.diagnosis || "Not yet diagnosed"}
                     </div>
                   </div>
                   
                   <div className="bg-sky-100 rounded-lg p-6 h-full">
                     <h4 className="text-center text-lg font-medium mb-4">Prescription</h4>
-                    <div className="mb-4 border h-2/3 rounded-2xl text-center">
-                        {patient.patient.prescription || "No prescription yet"}
-                    </div>
+                    <div className="mb-4 border h-2/3 rounded-2xl text-center p-2">
+                      {patient.medications?.length > 0 ? (
+                          <ul>
+                              {patient.medications.map((med, index) => (
+                                  <li key={index}>{med}</li>
+                              ))}
+                          </ul>
+                      ) : (
+                          "No prescription yet"
+                      )}
+                  </div>
                   </div>
                 </div>
               </div>

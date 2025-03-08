@@ -7,12 +7,8 @@ import Signup from "./pages/Signup";
 import LandingPage from "./pages/LandingPage";
 import Contactdoctor from "./pages/contactdoctor";
 import { VideoCall } from "./Components/VideoCall";
-import CheckPatient from  "./pages/CheckPatient";
-import Footer from "./Components/Footer";
-=======
 import CheckPatient from "./pages/CheckPatient";
 import ReportPage from "./pages/ReportPage";
->>>>>>> de7156c2f3779b905e048e4b1ebae10773ad4458
 
 function App() {
   return (
@@ -25,6 +21,7 @@ function App() {
         <Route path="/contactdoctor" element={<Contactdoctor />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/checkpatient" element={<CheckPatient />} />
+        <Route path="/reportpage" element={<ReportPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/videocall" element={<VideoCall />} />
       </Routes>

@@ -11,6 +11,8 @@ import ConsultDoctor from "./pages/ConsultDoctor";
 import { VideoCall } from "./Components/VideoCall";
 import CheckPatient from "./pages/CheckPatient";
 import { Toaster } from "react-hot-toast";
+import ReportPage from "./pages/ReportPage";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -27,9 +29,12 @@ function App() {
         <Route path="/UserProfile" element={<UserProfile />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/checkpatient" element={<CheckPatient />} />
+        <Route path="/reportpage" element={<ReportPage />} />
+        <Route path="*" element={<NotFound />} />
         <Route path="/videocall" element={<VideoCall />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

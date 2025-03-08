@@ -21,7 +21,7 @@ const Jeevanya = () => {
     {
       label: "Profile",
       hoverText: "View your health profile",
-      path: "/profile",
+      path: "/userprofile",
     },
     { label: "Forum", hoverText: "Join health discussions", path: "/forum" },
   ];

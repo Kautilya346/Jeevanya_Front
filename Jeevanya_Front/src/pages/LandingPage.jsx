@@ -87,15 +87,15 @@ const Jeevanya = () => {
     },
     { label: "Forum", hoverText: "Join health discussions", path: "/forum" },
     {
-      label: "Medical Records",
-      hoverText: "Upload your medical records",
+      label: "Upadate Medical Record",
+      hoverText: "Upload your medical records and current prescription",
       path: "/uploadmedicalrecord",
     },
-    {
-      label: "Report Page",
-      hoverText: "see your report page",
-      path: "/reportpage",
-    },
+    // {
+    //   label: "Report Page",
+    //   hoverText: "see your report page",
+    //   path: "/reportpage",
+    // },
   ];
 
   const services = [

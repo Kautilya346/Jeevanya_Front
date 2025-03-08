@@ -18,7 +18,7 @@ export default function Navbar() {
         src={logo}
         alt=""
         onClick={() => navigate("/")}
-        className="w-12 h-12"
+        className="w-12 h-12 cursor-pointer"
       />
 
       {/* Navigation Links */}

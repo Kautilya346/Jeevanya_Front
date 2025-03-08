@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@mui/icons-material": "^6.4.7",
+    "@mui/styled-engine": "^6.4.6",
     "@tailwindcss/vite": "^4.0.12",
     "axios": "^1.8.2",
     "framer-motion": "^12.4.10",

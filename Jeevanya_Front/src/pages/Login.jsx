@@ -18,16 +18,22 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/loginpatient",
-        userType === "patient"
-          ? { email, password }
-          : { licenseNumber, password }
-      );
+    // Set API endpoint dynamically
+    const endpoint =
+      userType === "patient"
+        ? "http://localhost:3000/api/auth/loginpatient"
+        : "http://localhost:3000/api/auth/logindoctor";
 
+    // Prepare request payload
+    const payload =
+      userType === "patient"
+        ? { email, password }
+        : { licenseNumber, password };
+
+    try {
+      const response = await axios.post(endpoint, payload);
       console.log("Login Successful:", response.data);
-      navigate("/"); 
+      navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }
@@ -35,7 +41,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#C2E6FF] to-[#FFFFFF] p-6">
-      <div className="bg-gradient-to-b from-[#D7EFFF] to-[#FFFFFF] shadow-xl rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 max-w-5xl w-full">
+      <div className="bg-gradient-to-b from-[#D7EFFF] to-[#FFFFFF] shadow-xl rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 max-w-4xl w-full">
         
         {/* Image Container */}
         <motion.div

@@ -16,7 +16,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/aidiagnose" element={<AIDiagnose />} />
         <Route path="/contactdoctor" element={<Contactdoctor />} />
-        <Route path="/UserProfile" element={<UserProfile />} />
+        <Route path="/userprofile" element={<UserProfile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

@@ -1,44 +1,87 @@
-import React from 'react';
-import { FcVideoCall } from 'react-icons/fc';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { FcVideoCall } from "react-icons/fc";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const ReportPage = () => {
   const navigate = useNavigate();
+  const { reportId } = useParams();
+  const [report, setReport] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchReport = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/report/getreport/67cbe50258a3d676892100c6`,
+          {
+            withCredentials: true,
+          }
+        );
+        setReport(response.data.report);
+      } catch (err) {
+        setError("Failed to fetch report");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchReport();
+  }, [reportId]);
+
+  if (loading) return <p className="text-center text-lg">Loading report...</p>;
+  if (error) return <p className="text-center text-red-600">{error}</p>;
+  if (!report) return <p className="text-center text-lg">No report found.</p>;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white p-10">
       <h1 className="text-4xl font-bold mb-6">Report Details</h1>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="space-y-6">
           <div className="bg-white p-6 rounded-lg shadow-md col-span-1">
             <div className="flex flex-col items-center">
               <div className="w-32 h-32 bg-gray-300 rounded-full mb-4"></div>
-              <p className="text-red-600 font-bold">active</p>
-              <h2 className="text-xl font-bold">Henry</h2>
-              <p className="text-gray-500">Did-852898837359</p>
+              <p
+                className={`text-red-600 font-bold ${
+                  report.status === "Completed"
+                    ? "text-green-600"
+                    : "text-red-600"
+                }`}
+              >
+                {report.status}
+              </p>
+              <h2 className="text-xl font-bold">
+                {report.patient?.name || "Unknown"}
+              </h2>
+              <p className="text-gray-500">Did-{report.patient?._id}</p>
             </div>
           </div>
-
           <div className="bg-white p-6 rounded-lg shadow-md col-span-1">
             <h2 className="text-xl font-bold">Current Prescription</h2>
-            <p>Lisinopril 10 mg tablet</p>
-            <p>Sig: Take one tablet by mouth once daily for hypertension.</p>
-            <p>Dispense: 30 tablets</p>
-            <p>Refills: 2</p>
-            <p>Loratadine 10 mg tablet (over-the-counter)</p>
+            {report.medications.length > 0 ? (
+              report.medications.map((med, index) => <p key={index}>{med}</p>)
+            ) : (
+              <p>No prescribed medications</p>
+            )}
           </div>
-
           <div className="bg-blue-100 p-6 rounded-lg shadow-md col-span-1">
             <h2 className="text-xl font-bold">First Consultation</h2>
-            <p>The patient presents for a routine check-up and reports feeling generally well. They mention occasional knee pain, especially after walking long distances, and mild heartburn after meals.</p>
+            <p>{report.suggestions || "No consultation details available."}</p>
           </div>
         </div>
-
         <div className="bg-white p-6 rounded-lg shadow-md col-span-2">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl font-bold">Chat with <span className="text-gray-500">Henry</span></h2>
-            <FcVideoCall className='text-[50px] hover:cursor-pointer' onClick={() => navigate('/videocall')} />
+            <h2 className="text-xl font-bold">
+              Chat with{" "}
+              <span className="text-gray-500">
+                {report.patient?.name || "Patient"}
+              </span>
+            </h2>
+            <FcVideoCall
+              className="text-[50px] hover:cursor-pointer"
+              onClick={() => navigate("/videocall")}
+            />
           </div>
         </div>
       </div>

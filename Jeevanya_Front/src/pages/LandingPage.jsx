@@ -24,6 +24,16 @@ const Jeevanya = () => {
       path: "/userprofile",
     },
     { label: "Forum", hoverText: "Join health discussions", path: "/forum" },
+    {
+      label: "Medical Records",
+      hoverText: "Upload your medical records and current precription ",
+      path: "/updateMedicalRecords",
+    },
+    {
+      label: "Report Page",
+      hoverText: "see your report page",
+      path: "/reportpage",
+    },
   ];
 
   return (
@@ -52,7 +62,7 @@ const Jeevanya = () => {
               onClick={() => navigate(item.path)}
               onMouseEnter={() => setHoverIndex(index)}
               onMouseLeave={() => setHoverIndex(null)}
-              className="glowing-button bg-white p-10 rounded-xl text-3xl font-semibold cursor-pointer transition duration-300 ease-in-out"
+              className="glowing-button bg-white p-10 rounded-xl text-3xl font-semibold cursor-pointer transition duration-800 ease-in-out"
             >
               {hoverIndex === index ? (
                 <span className="text-lg font-medium">{item.hoverText}</span>

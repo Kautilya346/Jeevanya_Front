@@ -7,11 +7,12 @@ export default function Navbar() {
     <div className="flex justify-between items-center px-8 py-2">
       <h1
         onClick={() => navigate("/")}
-        className="text-3xl font-bold text-[#3498DB] cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
+        className="text-3xl font-bold text-[#3498DB] cursor-pointer hover:scale-110 transition duration-300 ease-in-out tracking-wider"
         style={{ fontFamily: "Pixelcraft, sans-serif" }}
       >
         Jeevanya
       </h1>
+
       <div className="flex space-x-6 text-sm text-gray-700">
         <button
           onClick={() => navigate("/aboutus")}

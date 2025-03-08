@@ -1,24 +1,40 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const ConsultDoctor = () => {
   const location = useLocation();
   const doctor = location.state?.doctor;
   const [symptoms, setSymptoms] = useState("");
 
-  const handleSendReport = () => {
+  const handleSendReport = async () => {
     if (!symptoms.trim()) {
-      alert("Please enter symptoms before sending the report.");
+      toast.error("Please enter symptoms before sending the report.");
       return;
     }
 
-    console.log("Report Sent:", {
-      doctor: doctor.name,
-      speciality: doctor.speciality,
-      symptoms,
-    });
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/report/setFirstReport",
+        {
+          doctorId: doctor._id,
+          symptoms,
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
-    alert("Report sent successfully!");
+      console.log("Report Sent:", response.data);
+      toast.success("Report sent successfully!");
+    } catch (error) {
+      console.error(
+        "Error sending report:",
+        error.response?.data || error.message
+      );
+      toast.error("Failed to send report. Please try again.");
+    }
   };
 
   return (

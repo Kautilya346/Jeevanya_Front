@@ -11,4 +11,30 @@ body {
   font-style: normal;
 }
 
+@keyframes glowing-border {
+    0% {
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 10px rgba(52, 152, 219, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+    }
+  }
+  
+  .glowing-button {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #3498DB;
+    animation: glowing-border 3s infinite alternate ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .glowing-button:hover {
+    background-color: #D7EFFF;
+    transform: scale(1.03);
+    box-shadow: 0 0 12px rgba(52, 152, 219, 0.5);
+  }
+  
 @import "tailwindcss";

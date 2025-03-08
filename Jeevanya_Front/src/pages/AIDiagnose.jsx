@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const API_KEY = "AIzaSyCNpguGClxDMocK7z4NNEHScS5sXvhS2Sg";
+const API_KEY = "AIzaSyA_hb7cq8vwzBx8qDVQVihCPDc1RDZ1Zho";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`;
 
 const AIDiagnose = () => {
@@ -59,6 +59,11 @@ const AIDiagnose = () => {
       setIsPlaying(true);
     }
   };
+  const extractRecommendation = (text) => {
+    const match = text.match(/\*\*Recommendation:\*\*(.*?)- \*\*Prescription:\*\*/s);
+    console.log("kaut",match[1].replace(/\*/g, "").replace(/\n/g, " ").trim())
+    return match ? match[1].replace(/\*/g, "").replace(/\n/g, " ").trim() : "No recommendation found";
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -133,6 +138,8 @@ const AIDiagnose = () => {
         data.candidates?.[0]?.content?.parts?.[0]?.text ||
         "No diagnosis available.";
 
+        console.log(aiResponse);
+
       const diagnosisMatch = aiResponse.match(/\*\*Diagnosis:\*\* (.+)/);
       const riskLevelMatch = aiResponse.match(/\*\*Risk Level:\*\* (.+)/);
       const confidenceMatch = aiResponse.match(
@@ -141,9 +148,8 @@ const AIDiagnose = () => {
       const explanationMatch = aiResponse.match(
         /\*\*Explain-Symptoms-Detected:\*\* (.+)/
       );
-      const recommendationMatch = aiResponse.match(
-        /\*\*Recommended Action:\*\* (.+)/
-      );
+      const recommendationMatch = extractRecommendation(aiResponse);
+    
       const prescriptionMatch = aiResponse.match(/\*\*Prescription:\*\* (.+)/);
 
       setFormData((prevData) => ({
@@ -154,7 +160,7 @@ const AIDiagnose = () => {
         riskLevel: riskLevelMatch ? riskLevelMatch[1] : "Unknown",
         confidenceScore: confidenceMatch ? confidenceMatch[1] : "Unknown",
         recommendation: recommendationMatch
-          ? recommendationMatch[1]
+          ? recommendationMatch
           : "Consult a doctor for further guidance.",
         prescription: prescriptionMatch
           ? prescriptionMatch[1]
@@ -182,14 +188,24 @@ const AIDiagnose = () => {
     const match = text.match(/\*\*Prescription:\*\* (.+)/);
     return match ? match[1] : "Unknown";
   };
+ 
+//console.log(()=>{extractRecommendation(aiResponse)});
+
+
 
   return (
-    <div className="min-h-screen bg-slate-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-100 py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#E1F5FE]  to-[#FFFFFF]">
+      <h1
+        className="text-3xl text-center mb-7 font-bold text-[#3498DB] cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
+        style={{ fontFamily: "Pixelcraft, sans-serif" }}
+      >
+        Dhanvantari AI
+      </h1>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Input Section */}
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-slate-100 pb-4">
-            AI Medical Assistant
+            Symptoms
           </h2>
 
           <div className="space-y-6">
@@ -201,7 +217,7 @@ const AIDiagnose = () => {
                 name="symptoms"
                 value={formData.symptoms}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
+                className="w-full bg-[#E1F5FE] px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#328cc8] focus:border-[#328cc8] outline-none"
                 rows="4"
                 placeholder="Describe your symptoms..."
               />
@@ -216,7 +232,7 @@ const AIDiagnose = () => {
                   name="symptomDuration"
                   value={formData.symptomDuration}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
+                  className="w-full bg-[#E1F5FE] px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#328cc8] focus:border-[#328cc8] outline-none"
                 >
                   <option>Hours</option>
                   <option>Days</option>
@@ -225,7 +241,7 @@ const AIDiagnose = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-5">
                   Pain Level: {formData.painLevel}
                 </label>
                 <input
@@ -244,7 +260,7 @@ const AIDiagnose = () => {
               <label className="block text-sm font-medium text-slate-700 mb-2">
                 Upload Image (Optional)
               </label>
-              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-xl">
+              <div className="bg-[#E1F5FE] mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-xl">
                 <div className="space-y-1 text-center">
                   {formData.imagePreview ? (
                     <img
@@ -268,7 +284,7 @@ const AIDiagnose = () => {
                         />
                       </svg>
                       <div className="flex text-sm text-slate-600">
-                        <label className="relative cursor-pointer bg-white rounded-md font-medium text-teal-600 hover:text-teal-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-teal-500">
+                        <label className="relative cursor-pointer bg-white rounded-md font-medium text-[#3498DB] hover:text-[#3498dbd5] focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-teal-500">
                           <span>Upload a file</span>
                           <input
                             type="file"
@@ -291,7 +307,7 @@ const AIDiagnose = () => {
             <button
               onClick={analyzeWithAI}
               disabled={isLoading}
-              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
+              className="w-full bg-[#328cc8] hover:bg-[#328cc8d7] text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">

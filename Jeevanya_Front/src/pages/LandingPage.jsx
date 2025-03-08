@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
 import Consulting from "../Components/Consulting";
 
 const Jeevanya = () => {
   const navigate = useNavigate();
+  const [hoverIndex, setHoverIndex] = useState(null);
+
+  const buttons = [
+    {
+      label: "Connect",
+      hoverText: "Connect with a doctor",
+      path: "/contactdoctor",
+    },
+    {
+      label: "Diagnosis",
+      hoverText: "Get a medical diagnosis",
+      path: "/diagnosis",
+    },
+    {
+      label: "Profile",
+      hoverText: "View your health profile",
+      path: "/profile",
+    },
+    { label: "Forum", hoverText: "Join health discussions", path: "/forum" },
+  ];
+
   return (
     <div
-      style={{ fontFamily: 'Barlow, sans-serif' }}
+      style={{ fontFamily: "Barlow, sans-serif" }}
       className="min-h-screen bg-gradient-to-br from-[#E1F5FE] via-[#D4F1F4] to-[#FFFFFF] p-6"
     >
       {/* Navbar */}
@@ -23,34 +44,24 @@ const Jeevanya = () => {
             Get an appointment
           </button>
         </div>
+
+        {/* Buttons Grid with Hover Effect */}
         <div className="grid grid-cols-2 gap-4 w-3/5">
-          <button
-            onClick={() => navigate("/contactdoctor")}
-            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out"
-          >
-            Connect
-          </button>
-
-          <button
-            onClick={() => navigate("/diagnosis")}
-            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out"
-          >
-            Diagnosis
-          </button>
-
-          <button
-            onClick={() => navigate("/profile")}
-            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out"
-          >
-            Profile
-          </button>
-
-          <button
-            onClick={() => navigate("/forum")}
-            className="border border-[#3498DB] bg-white cursor-pointer p-10 rounded-xl text-3xl font-semibold hover:bg-[#D7EFFF] hover:scale-105 transition duration-300 ease-in-out"
-          >
-            Forum
-          </button>
+          {buttons.map((item, index) => (
+            <button
+              key={index}
+              onClick={() => navigate(item.path)}
+              onMouseEnter={() => setHoverIndex(index)}
+              onMouseLeave={() => setHoverIndex(null)}
+              className="glowing-button bg-white p-10 rounded-xl text-3xl font-semibold cursor-pointer transition duration-300 ease-in-out"
+            >
+              {hoverIndex === index ? (
+                <span className="text-lg font-medium">{item.hoverText}</span>
+              ) : (
+                <span>{item.label}</span>
+              )}
+            </button>
+          ))}
         </div>
       </div>
 

@@ -27,7 +27,7 @@ const Jeevanya = () => {
     {
       label: "Medical Records",
       hoverText: "Upload your medical records and current precription ",
-      path: "/updateMedicalRecords",
+      path: "/uploadmedicalrecord",
     },
     {
       label: "Report Page",
@@ -92,7 +92,9 @@ const Jeevanya = () => {
               Provide real-time access to medical records.
             </span>
           </div>
-          <div className="bg-gray-200 p-12 rounded-xl text-center shadow-sm text-black">Best results</div>
+          <div className="bg-gray-200 p-12 rounded-xl text-center shadow-sm text-black">
+            Best results
+          </div>
         </div>
       </div>
     </div>

@@ -31,7 +31,9 @@ export default function Login() {
         : { licenseNumber, password };
 
     try {
-      const response = await axios.post(endpoint, payload);
+      const response = await axios.post(endpoint, payload,{
+        withCredentials: true,
+      });
       console.log("Login Successful:", response.data);
       navigate("/");
     } catch (err) {

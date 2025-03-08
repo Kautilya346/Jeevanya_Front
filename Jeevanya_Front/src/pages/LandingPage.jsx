@@ -71,18 +71,18 @@ const Jeevanya = () => {
 
   const buttons = [
     {
-      label: "Connect",
+      label: "Consult a Doctor",
       hoverText: "Connect with a doctor",
       path: "/contactdoctor",
     },
     {
-      label: "Diagnosis",
+      label: "AI Diagnosis",
       hoverText: "Get a medical diagnosis",
       path: "/aidiagnose",
     },
-    { label: "Forum", hoverText: "Join health discussions", path: "/forum" },
+    { label: "Support Groups", hoverText: "Join health discussions", path: "/forum" },
     {
-      label: "Update Medical Record",
+      label: "Upload Medical Record",
       hoverText: "Upload your medical records and current prescription",
       path: "/uploadmedicalrecord",
     },

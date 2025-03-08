@@ -89,7 +89,10 @@ const Consulting = () => {
         <p className="text-gray-700 font-medium mb-2">
           Need help choosing a specialist?
         </p>
-        <button className="bg-[#4CC0BF] text-black px-6 py-2 rounded-lg hover:bg-white transition-colors font-medium">
+        <button
+          onClick={() => navigate("/contactdoctor")}
+          className="bg-[#4CC0BF] text-black px-6 py-2 rounded-lg hover:bg-white transition-colors font-medium"
+        >
           Get a Free Consultation
         </button>
       </div>

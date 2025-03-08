@@ -17,6 +17,7 @@ import UploadMedicalRecord from "./pages/UploadMedicalRecord";
 import DoctorProfile from "./pages/DoctorProfile";
 import Forum from "./pages/Forum";
 import Community from "./pages/Community";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/doctorprofile" element={<DoctorProfile />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/videocall" element={<VideoCall />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

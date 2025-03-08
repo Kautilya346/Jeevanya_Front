@@ -44,7 +44,7 @@ export default function Login() {
       if (userType === "patient") {
         navigate("/"); 
       } else {
-        navigate("/"); 
+        navigate("/doctorprofile"); 
       }
     } catch (err) {
       toast.error("Login Failed");

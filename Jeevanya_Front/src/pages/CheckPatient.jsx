@@ -3,15 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { FcVideoCall } from "react-icons/fc";
 import Chat from "../Components/Chat";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 
 const CheckPatient = () => {
   
   const [userData, setUserData] = useState(null);
   const [report, setReport] = useState(null);
-  const location = useLocation();
-  const reportID=location.state() ;
-  //const reportID="67cbe50258a3d676892100c8";
+
+  const reportID=useParams();
+  // const reportID="67cbe50258a3d676892100c8";
 
   const getProfile = async () => {
     try {

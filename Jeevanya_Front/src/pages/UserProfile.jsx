@@ -28,7 +28,6 @@ const UserProfile = () => {
         "http://localhost:3000/api/report/getreportbyuser",
         { withCredentials: true }
       );
-      console.log("repolrts ",response)
       setReports(response.data);
     } catch (err) {
       console.log(err);

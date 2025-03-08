@@ -7,11 +7,10 @@ const Jeevanya = () => {
   const navigate = useNavigate();
   return (
     <div
-      style={{ fontFamily: 'Barlow, sans-serif' }}
+      style={{ fontFamily: "Barlow, sans-serif" }}
       className="min-h-screen bg-gradient-to-br from-[#E1F5FE] via-[#D4F1F4] to-[#FFFFFF] p-6"
     >
       {/* Navbar */}
-      <Navbar />
 
       {/* Hero Section */}
       <div className="bg-gradient-to-t from-[#EAF6FF] to-white rounded-4xl p-10 mt-10 shadow-md flex justify-between">

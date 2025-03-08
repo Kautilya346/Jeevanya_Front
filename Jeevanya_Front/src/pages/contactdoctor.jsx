@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const API_KEY = "AIzaSyCNpguGClxDMocK7z4NNEHScS5sXvhS2Sg";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
@@ -25,12 +26,13 @@ const ContactDoctor = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
     setLoading(true);
     setError("");
     setDoctorDomain("");
-    setDoctors([]);
+
     try {
       let result = selectedDomain;
       if (!selectedDomain && symptoms.trim()) {
@@ -112,11 +114,14 @@ const ContactDoctor = () => {
           <h2 className="text-2xl font-bold mb-4 text-center text-gray-700">
             Available Doctors
           </h2>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <ul>
             {doctors.map((doctor) => (
               <li
                 key={doctor._id}
-                className="p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-md"
+                className="p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-md cursor-pointer"
+                onClick={() =>
+                  navigate("/consultdoctor", { state: { doctor } })
+                }
               >
                 <strong className="text-lg text-gray-800">{doctor.name}</strong>
                 <p className="text-blue-600 font-medium">{doctor.speciality}</p>

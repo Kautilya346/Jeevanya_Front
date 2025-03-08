@@ -6,16 +6,20 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import LandingPage from "./pages/LandingPage";
 import Contactdoctor from "./pages/contactdoctor";
+import Navbar from "./Components/Navbar";
+import ConsultDoctor from "./pages/ConsultDoctor";
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/aidiagnose" element={<AIDiagnose />} />
         <Route path="/contactdoctor" element={<Contactdoctor />} />
+        <Route path="/consultdoctor" element={<ConsultDoctor />} />
         <Route path="/UserProfile" element={<UserProfile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

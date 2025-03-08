@@ -1,9 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FcVideoCall } from "react-icons/fc";
 import Chat from "../Components/Chat";
+import axios from "axios";
 
 const CheckPatient = () => {
+  const [userData, setUserData] = useState(null);
+
+  const getProfile = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/doctor/getcurrentdoctor",
+        { withCredentials: true }
+      );
+      console.log(response.data.doctor);
+      setUserData(response.data.doctor);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   const navigate = useNavigate();
   const [modalType, setModalType] = useState(null);
   const [message, setMessage] = useState("");
@@ -24,13 +44,19 @@ const CheckPatient = () => {
 
         <div className="w-full">
           <div className="flex items-center justify-around w-full bg-[#4CC0BF] p-6 rounded-2xl shadow-md">
-            <div className="w-36 h-36 bg-gray-300 rounded-full mb-4"></div>
-            <div className="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center w-3xl">
-              <h2 className="text-2xl font-bold">Junn Jaas</h2>
-              <p className="text-gray-500">PT-852898837589</p>
-              <p>DOB: 11/02/05</p>
-              <p>Member since: 15/06/23</p>
+            <div className="w-36 h-36 bg-gray-300 rounded-full mb-4">
+              <img
+                src="https://www.shutterstock.com/image-vector/male-doctors-white-medical-coats-600nw-2380152965.jpg"
+                alt=""
+                className="rounded-full"
+              />
             </div>
+            {userData && (
+              <div className="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center w-3xl">
+                <h2 className="text-2xl font-bold">{userData.name}</h2>
+                <p className="text-gray-500">{userData.licenseNumber}</p>
+              </div>
+            )}
             <div>
               {["Diagnosis", "Suggestion", "Prescription"].map((type) => (
                 <div
@@ -89,7 +115,7 @@ const CheckPatient = () => {
             onClick={() => navigate("/videocall")}
           />
         </div>
-        <Chat receiver="67cc1f98018e5d2f186f36ed" sender="67cbe0d411cdd39989ad62c7" />
+        <Chat receiver="67cbe0d411cdd39989ad62c7" sender="67cc27ca73c49aa5d48dd574" />
       </div>
 
       {/* Modal */}

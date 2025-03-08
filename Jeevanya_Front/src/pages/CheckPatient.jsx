@@ -3,15 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { FcVideoCall } from "react-icons/fc";
 import Chat from "../Components/Chat";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 
 const CheckPatient = () => {
-  
   const [userData, setUserData] = useState(null);
   const [report, setReport] = useState(null);
-  const location = useLocation();
-  const reportID=location.state() ;
-  //const reportID="67cbe50258a3d676892100c8";
+
+  const { reportID } = useParams();
+  console.log("dfyuweyd", reportID);
 
   const getProfile = async () => {
     try {
@@ -32,7 +30,7 @@ const CheckPatient = () => {
         `http://localhost:3000/api/report/getreportdoctor/${reportID}`,
         { withCredentials: true }
       );
-      console.log("ds",response.data.report);
+      console.log("ds", response.data.report);
       setReport(response.data.report);
     } catch (err) {
       console.log(err);
@@ -71,7 +69,7 @@ const CheckPatient = () => {
                 className="rounded-full"
               />
             </div>
-            {userData && (
+            {userData && report && (
               <div className="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center w-3xl">
                 <h2 className="text-2xl font-bold">{report.patient.name}</h2>
                 <p className="text-gray-500">{userData.licenseNumber}</p>
@@ -92,8 +90,6 @@ const CheckPatient = () => {
             </div>
           </div>
         </div>
-
-        
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full">
@@ -101,7 +97,7 @@ const CheckPatient = () => {
           <h3 className="text-xl font-semibold mb-4">Current Prescription</h3>
           <ul className="list-disc pl-5">
             <li>
-              {}{report ? report.medications : "No prescription available."}
+              {report ? report.medications : "No prescription available."}
             </li>
             <li>Loratadine 10 mg tablet (over-the-counter)</li>
           </ul>
@@ -109,7 +105,7 @@ const CheckPatient = () => {
         <div className="bg-white p-6 rounded-2xl shadow-md w-full">
           <h3 className="text-xl font-semibold mb-4">Symptoms</h3>
           <p>
-            { report.symptoms || "No Symptoms details available."}
+            {report ? report.symptoms : "No Symptoms details available."}
           </p>
         </div>
       </div>
@@ -154,17 +150,15 @@ const CheckPatient = () => {
                 </button>
               </div>
             </div>
-            
           </div>
         </>
       )}
       <div className="bg-white p-6 rounded-2xl shadow-md mt-8 w-full">
         <h3 className="text-xl font-semibold mb-4 w-full">Past Medical History</h3>
         <p className="w-full">
-          {report ? report.patient.medicalHistory : "No medical history available."} 
+          {report ? report.patient.medicalHistory : "No medical history available."}
         </p>
       </div>
-
     </div>
   );
 };

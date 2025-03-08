@@ -92,7 +92,7 @@ const DoctorProfile = () => {
             <p>No patients</p>
           ) : (
             patients.map(patient => (
-              <div key={patient.id} onClick={()=>navigate("/checkpatient",{state:{patient}})} className="cursor-pointer mb-6 border rounded-lg p-6">
+              <div key={patient.id} onClick={()=>navigate(`/checkpatient/${patient._id}`)} className="cursor-pointer mb-6 border rounded-lg p-6">
                 <h3 className="text-lg font-semibold mb-4">Patient Name : <span className="text-gray-600">{patient.patient.name}</span></h3>
                 
                 <div className="grid grid-cols-2 gap-6 ">

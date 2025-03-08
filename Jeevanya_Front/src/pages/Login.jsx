@@ -31,7 +31,9 @@ export default function Login() {
         : { licenseNumber, password };
 
     try {
-      const response = await axios.post(endpoint, payload);
+      const response = await axios.post(endpoint, payload,{
+        withCredentials:true
+      });
       console.log("Login Successful:", response.data);
       navigate("/");
     } catch (err) {
@@ -140,7 +142,7 @@ export default function Login() {
               Don't have an account?{" "}
               <button
                 onClick={() => navigate("/signup")}
-                className="text-blue-500 hover:underline cursor-pointer"
+                className="text-[#4CC0BF] font-bold cursor-pointer hover:underline"
               >
                 Sign Up
               </button>

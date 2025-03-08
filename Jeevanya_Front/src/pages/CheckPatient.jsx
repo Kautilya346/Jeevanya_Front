@@ -123,7 +123,7 @@ const CheckPatient = () => {
         <Chat receiver="67cbe0d411cdd39989ad62c7" sender="67cc27ca73c49aa5d48dd574" />
       </div>
 
-      {/* Modal */}
+
       {modalType && (
         <>
           <div className="fixed inset-0 bg-black opacity-50"></div>

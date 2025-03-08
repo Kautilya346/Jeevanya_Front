@@ -133,7 +133,7 @@ const UploadMedicalRecord = () => {
           const response = await axios.post(
             `http://localhost:3000/api/patient/setmedicalrecord`,
             {
-              medicalHistory: doctorContent, // Sending the doctor content as part of the medical history
+              medicalHistory: doctorContent, 
             },
             {
               withCredentials: true,
@@ -141,19 +141,19 @@ const UploadMedicalRecord = () => {
           );
 
           toast.success("Medical history updated successfully!");
-          // alert("Medical history updated successfully:", response.data);
+
         } catch (error) {
           if (error.response) {
-            // The request was made and the server responded with a status code outside the 2xx range
+
             console.error(
               "Error updating medical history:",
               error.response.data.message
             );
           } else if (error.request) {
-            // The request was made but no response was received
+
             console.error("No response received:", error.request);
           } else {
-            // Something else triggered the error
+
             toast.error("Error:", error.message);
           }
         }
@@ -227,7 +227,7 @@ const UploadMedicalRecord = () => {
   return (
     <div className="p-6 my-6 bg-[#DDEBFE]">
       <div className="flex max-w-6xl mx-auto  bg-white shadow-xl rounded-xl p-6">
-        {/* Left Panel - Input Section */}
+
         <div className="w-1/2 pr-6 border-r-2 border-gray-100">
           <h2 className="text-2xl font-bold mb-6 text-blue-800">
             Medical Record Analyzer
@@ -341,13 +341,11 @@ const UploadMedicalRecord = () => {
           </div>
         </div>
 
-        {/* Right Panel - Results */}
         <div className="w-1/2 pl-6">
           <h3 className="text-2xl font-bold mb-6 text-blue-800">
             Analysis Results
           </h3>
 
-          {/* Patient Summary */}
           <div className="mb-8 bg-blue-50 rounded-xl p-5 shadow-inner">
             <div className="flex items-center gap-2 mb-4">
               <svg
@@ -382,7 +380,6 @@ const UploadMedicalRecord = () => {
                   {isTranslating ? (
                     <>
                       <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                        {/* Spinner SVG */}
                       </svg>
                       Translating...
                     </>
@@ -452,7 +449,6 @@ const UploadMedicalRecord = () => {
             </div>
           </div>
 
-          {/* Doctor's Analysis */}
         </div>
       </div>
       <div className="bg-white rounded-xl p-5 shadow-inner border border-gray-200 m-6">
@@ -478,7 +474,6 @@ const UploadMedicalRecord = () => {
 
         {summary.doctor.length > 0 ? (
           <div className="space-y-8">
-            {/* Diagnosis Section */}
             <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
               <h5 className="font-medium text-blue-800 mb-3">
                 {summary.doctor[0]?.title || "Diagnosis Overview"}
@@ -488,7 +483,6 @@ const UploadMedicalRecord = () => {
               </div>
             </div>
 
-            {/* Prescription Section */}
             <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
               <h5 className="font-medium text-yellow-800 mb-3">
                 {summary.doctor[1]?.title || "Medication Analysis"}
@@ -498,7 +492,6 @@ const UploadMedicalRecord = () => {
               </div>
             </div>
 
-            {/* Management Section */}
             <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
               <h5 className="font-medium text-green-800 mb-3">
                 {summary.doctor[2]?.title || "Care Strategy"}

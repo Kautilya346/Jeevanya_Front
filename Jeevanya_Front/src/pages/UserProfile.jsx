@@ -44,7 +44,6 @@ const UserProfile = () => {
       <h1 className="text-2xl font-bold">Welcome Back</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* Sidebar Section - Only render when userData is available */}
         {userData && (
           <div className="space-y-6">
             <div className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center">
@@ -59,7 +58,7 @@ const UserProfile = () => {
               <h3 className="font-bold text-lg">Information</h3>
               <p>
                 <strong>DOB:</strong>{" "}
-                {userData.date_of_birth?.slice(0, 10) /* Optional chaining */}
+                {userData.date_of_birth?.slice(0, 10) }
               </p>
               <p>
                 <strong>Gender:</strong> {userData.gender}
@@ -80,9 +79,7 @@ const UserProfile = () => {
           </div>
         )}
 
-        {/* Main Content Section */}
         <div className="md:col-span-3 space-y-6">
-          {/* Upcoming Appointments */}
           <div className="bg-white shadow-lg rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-4">Upcoming Appointments:</h2>
             {appointments.map((appt, index) => (
@@ -106,8 +103,6 @@ const UserProfile = () => {
             ))}
           </div>
 
-          {/* Previous Reports */}
-          {/* Previous Reports */}
           <div className="bg-white shadow-lg rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-4">Previous Reports</h2>
             {reports.map((report, index) => (

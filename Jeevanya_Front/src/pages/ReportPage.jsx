@@ -98,7 +98,7 @@ const ReportPage = () => {
             </h2>
             <FcVideoCall
               className="text-[40px] hover:cursor-pointer"
-              onClick={() => window.open("/videocall", "_blank") // Opens in a new tab
+              onClick={() => window.open("/videocall", "_blank") 
               }
             />
           </div>

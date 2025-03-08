@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [userType, setUserType] = useState("patient");
-  const [step, setStep] = useState(1); // Step tracking only for patients
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -96,7 +96,6 @@ export default function Signup() {
             </div>
           </div>
 
-          {/* Step 1: Common for both Patients and Doctors */}
           {step === 1 && (
             <motion.form
               onSubmit={(e) => {
@@ -232,7 +231,6 @@ export default function Signup() {
             </motion.form>
           )}
 
-          {/* Step 2: Only for Patients */}
           {step === 2 && userType === "patient" && (
             <motion.form
               onSubmit={handleSignup}

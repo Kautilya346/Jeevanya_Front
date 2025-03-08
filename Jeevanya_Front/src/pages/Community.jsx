@@ -111,7 +111,7 @@ const CommunityDiscussions = () => {
             ))
           )}
 
-          {/* Input for new message */}
+
           <div className="mt-6 p-4 bg-white rounded-lg shadow-md">
             <input
               type="text"

@@ -121,7 +121,7 @@ const Jeevanya = () => {
       style={{ fontFamily: "Barlow, sans-serif" }}
       className="min-h-screen bg-gradient-to-br from-[#E1F5FE] via-[#D4F1F4] to-[#FFFFFF] p-6"
     >
-      {/* Hero Section */}
+
       <motion.div className="flex flex-col gap-1   w-[90%] text-center mx-auto pb-0 m-0 relative">
         <motion.div
           className="text-center justify-center flex mb-[-50px] font-gravity text-[60px] font-bold"
@@ -162,7 +162,7 @@ const Jeevanya = () => {
             </p>
           </div>
 
-          {/* Buttons Grid with Hover Effect */}
+
           <div className="grid grid-cols-2 gap-4 w-3/5 z-10">
             {buttons.map((item, index) => (
               <button
@@ -183,11 +183,11 @@ const Jeevanya = () => {
         </div>
       </motion.div>
 
-      {/* Consulting Section */}
+
       <div className="mt-32"></div>
       <Consulting />
 
-      {/* Enhanced Services Section */}
+
       <div className="mt-16">
         <h2 className="text-3xl font-semibold text-center text-gray-800 mb-3">
           Our Services

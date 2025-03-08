@@ -16,7 +16,6 @@ const token =
 const userId = "Darth_Nihilus";
 const callId = "3NtKfkrBkSHa";
 
-// Set up the user object
 const user = {
   id: userId,
   name: "James",
@@ -105,20 +104,19 @@ export const MyUI = () => {
 
   const endCall = async () => {
     if (call) {
-      await call.leave(); // Leave the call
-      await new Promise((resolve) => setTimeout(resolve, 4000)); // Wait for 4 seconds
+      await call.leave(); 
+      await new Promise((resolve) => setTimeout(resolve, 4000)); 
 
-      navigate("/"); // Navigate to home page
+      navigate("/"); 
 
       setTimeout(() => {
-        window.close(); // Close window after a delay to ensure navigation happens
-      }, 500); // Small delay to allow navigation
+        window.close();
+      }, 500); 
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-between w-full h-screen bg-[#C7E9FF] text-black">
-      {/* Header */}
       <div className="w-full p-4 flex justify-between items-center bg-white shadow-md">
         <h2 className="text-xl font-medium">
           Meeting Room: {call.id.slice(-4)}
@@ -150,15 +148,13 @@ export const MyUI = () => {
 
         <button
           onClick={() => {
-            // e.preventDefault(); // Prevent any default behavior that might interfere
-            navigate("/"); // Ensure navigation happens
+            navigate("/");
           }}
           className="px-4 py-2 rounded-md bg-red-600 text-white flex items-center justify-center font-medium hover:bg-red-700 transition-all"
         >
           End Call
         </button>
       </div>
-      {/* Video grid */}
       <div className="flex-1 w-full p-6 flex items-center justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-h-full">
           {participants.map((participant) => (
@@ -185,7 +181,6 @@ export const MyUI = () => {
         </div>
       </div>
 
-      {/* Controls */}
       <div className="w-full bg-white p-4 shadow-md flex justify-center"></div>
     </div>
   );

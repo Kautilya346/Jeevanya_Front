@@ -21,7 +21,7 @@ const About = () => {
       <h1 className="text-6xl font-bold mb-16">About Us</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Left Card - Company Introduction */}
+
         <div className="bg-blue-50 rounded-2xl p-8 md:p-10 shadow-sm hover:shadow-md transition duration-300">
           <h2 className="text-4xl font-bold mb-6">We are <span className='text-[#4CC0BF]'>Jeevanya</span></h2>
           <p className="text-lg leading-relaxed">
@@ -33,7 +33,7 @@ const About = () => {
           </p>
         </div>
         
-        {/* Right Card - Features */}
+
         <div className="bg-blue-50 rounded-2xl p-8 md:p-10 shadow-sm hover:shadow-md transition duration-300">
           <ul className="space-y-8">
             {features.map((feature, index) => (
@@ -51,7 +51,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* Additional Section */}
+
       <div className="mt-16 bg-blue-50 rounded-2xl p-8 md:p-10 shadow-sm hover:shadow-md transition duration-300">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center">
@@ -69,7 +69,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* Mission Statement */}
+
       <div className="mt-16 text-center max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold mb-6 text-[#4CC0BF]">Our Mission</h2>
         <p className="text-xl">

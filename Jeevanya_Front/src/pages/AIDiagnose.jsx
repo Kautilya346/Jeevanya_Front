@@ -204,7 +204,7 @@ const AIDiagnose = () => {
         Dhanvantari AI
       </h1>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Input Section */}
+
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-slate-100 pb-4">
             Symptoms
@@ -341,7 +341,7 @@ const AIDiagnose = () => {
           </div>
         </div>
 
-        {/* Results Section */}
+
         <div className="bg-white rounded-xl shadow-lg p-6 space-y-6">
           <h3 className="text-2xl font-bold text-slate-800 border-b-2 border-slate-100 pb-4">
             Diagnosis Results

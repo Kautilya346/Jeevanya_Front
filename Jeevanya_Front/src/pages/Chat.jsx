@@ -8,11 +8,11 @@ const Chat = () => {
     const sender = "67cbe0d411cdd39989ad62c7"
     const receiver = "67cc1f98018e5d2f186f36ed"
   useEffect(() => {
-    // Fetch previous chat history
+
     axios.get(`http://localhost:3000/messages/${sender}/${receiver}`)
       .then((res) => setMessages(res.data));
 
-    // Listen for new messages
+
     socket.on("receiveMessage", (message) => {
       setMessages((prev) => [...prev, message]);
     });

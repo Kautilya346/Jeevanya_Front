@@ -4,13 +4,13 @@ import axios from "axios";
 import doctor from "../assests/doctor.png";
 import patient from "../assests/patient.png";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast"; // Import toast functionality
+import { toast, Toaster } from "react-hot-toast"; 
 
 export default function Login() {
   const [userType, setUserType] = useState("patient");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [licenseNumber, setLicenseNumber] = useState(""); // For doctors
+  const [licenseNumber, setLicenseNumber] = useState(""); 
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -19,13 +19,13 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Set API endpoint dynamically
+
     const endpoint =
       userType === "patient"
         ? "http://localhost:3000/api/auth/loginpatient"
         : "http://localhost:3000/api/auth/logindoctor";
 
-    // Prepare request payload
+
     const payload =
       userType === "patient"
         ? { email, password }
@@ -37,31 +37,25 @@ export default function Login() {
       });
       console.log("Login Successful:", response.data);
       
-      // Show success toast
+
       toast.success(`${userType === "patient" ? "Patient" : "Doctor"} login successful!`);
 
-      // Redirect based on user type
+
       if (userType === "patient") {
-        navigate("/"); // Redirect patient to homepage or appropriate route
+        navigate("/"); 
       } else {
-        navigate("/"); // Redirect doctor to their dashboard or profile
+        navigate("/"); 
       }
     } catch (err) {
-      // const errorMessage = err.response?.data?.message || "Login failed";
-      // setError(errorMessage);
-      
-      // Show error toast
       toast.error("Login Failed");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#C2E6FF] to-[#FFFFFF] p-6">
-      {/* Add Toaster component */}
-      {/* <Toaster position="top-right" /> */}
       
       <div className="bg-gradient-to-b from-[#D7EFFF] to-[#FFFFFF] shadow-xl rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 max-w-4xl w-full">
-        {/* Image Container */}
+
         <motion.div
           initial={false}
           animate={{ x: userType === "patient" ? 0 : -20, opacity: 1 }}
@@ -77,14 +71,14 @@ export default function Login() {
           />
         </motion.div>
 
-        {/* Form Container */}
+
         <motion.div
           initial={false}
           animate={{ x: userType === "patient" ? 0 : 20, opacity: 1 }}
           transition={transition}
           className="flex-1 max-w-md w-full"
         >
-          {/* Toggle Buttons */}
+
           <div className="flex justify-center gap-4 mb-6">
             <div className="relative flex bg-gray-200 rounded-full p-1">
               <button
@@ -109,7 +103,7 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Login Form */}
+
           <motion.form
             onSubmit={handleLogin}
             initial={false}

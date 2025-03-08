@@ -9,7 +9,6 @@ const Footer = () => {
     <footer className="bg-gray-800 w-full text-white py-12">
       <div className="max-w-screen-xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
-          {/* Logo and Company Info */}
           <div className="mb-8 md:mb-0 text-center md:text-left">
             <img
               src={logo}
@@ -22,7 +21,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div className="mb-8 md:mb-0 text-center md:text-left">
             <h3 className="text-lg font-semibold mb-4 border-b border-gray-700 pb-2">
               Quick Links
@@ -63,7 +61,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div className="mb-8 md:mb-0 text-center md:text-left md:max-w-xs">
             <h3 className="text-lg font-semibold mb-4 border-b border-gray-700 pb-2">
               Stay Updated
@@ -90,16 +87,13 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="border-t border-gray-800 my-8"></div>
 
-        {/* Bottom Section with Copyright and Social Icons */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
             © {currentYear} Jeevanya. All rights reserved.
           </p>
 
-          {/* Social Media Links */}
           <div className="flex space-x-4">
             <a
               href="https://linkedin.com"

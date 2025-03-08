@@ -64,7 +64,7 @@ const ConsultDoctor = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
-          {/* Doctor Profile */}
+
           <div className="col-span-1 p-6 bg-blue-50">
             <div className="flex flex-col items-center mb-6">
               <div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center text-2xl font-bold text-white mb-4">
@@ -102,7 +102,7 @@ const ConsultDoctor = () => {
             </div>
           </div>  
 
-          {/* Symptoms Form */}
+
           <div className="col-span-2 p-8">
             <h2 className="text-4xl font-bold text-gray-800 mb-6">
               Describe Your Symptoms

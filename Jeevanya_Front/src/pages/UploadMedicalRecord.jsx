@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Tesseract from "tesseract.js";
+import toast from "react-hot-toast";
 
 const UploadMedicalRecord = () => {
   const [file, setFile] = useState(null);
@@ -126,9 +127,41 @@ const UploadMedicalRecord = () => {
         ?.trim();
 
       const doctorContent = rawText.split("**Doctor's Analysis**")[1]?.trim();
+      console.log(doctorContent);
+      async function sendDoctorContentToBackend() {
+        try {
+          const response = await axios.post(
+            `http://localhost:3000/api/patient/setmedicalrecord`,
+            {
+              medicalHistory: doctorContent, // Sending the doctor content as part of the medical history
+            },
+            {
+              withCredentials: true,
+            }
+          );
+
+          toast.success("Medical history updated successfully!");
+          // alert("Medical history updated successfully:", response.data);
+        } catch (error) {
+          if (error.response) {
+            // The request was made and the server responded with a status code outside the 2xx range
+            console.error(
+              "Error updating medical history:",
+              error.response.data.message
+            );
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.error("No response received:", error.request);
+          } else {
+            // Something else triggered the error
+            toast.error("Error:", error.message);
+          }
+        }
+      }
+
+      sendDoctorContentToBackend();
 
       const doctorSections = doctorContent.split(/\d+\.\s+/).slice(1);
-    
 
       const formattedDoctor = doctorSections.map((section) => {
         const [titlePart, ...contentParts] = section.split(":");

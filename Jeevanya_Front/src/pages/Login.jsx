@@ -31,11 +31,17 @@ export default function Login() {
         : { licenseNumber, password };
 
     try {
-      const response = await axios.post(endpoint, payload,{
+      const response = await axios.post(endpoint, payload, {
         withCredentials: true,
       });
       console.log("Login Successful:", response.data);
-      navigate("/");
+
+      // Redirect based on user type
+      if (userType === "patient") {
+        navigate("/"); // Redirect patient to homepage or appropriate route
+      } else {
+        navigate("/"); // Redirect doctor to their dashboard or profile
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }
@@ -44,13 +50,14 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#C2E6FF] to-[#FFFFFF] p-6">
       <div className="bg-gradient-to-b from-[#D7EFFF] to-[#FFFFFF] shadow-xl rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 max-w-4xl w-full">
-        
         {/* Image Container */}
         <motion.div
           initial={false}
           animate={{ x: userType === "patient" ? 0 : -20, opacity: 1 }}
           transition={transition}
-          className={`flex-1 ${userType === "patient" ? "order-first" : "order-last"}`}
+          className={`flex-1 ${
+            userType === "patient" ? "order-first" : "order-last"
+          }`}
         >
           <img
             src={userType === "patient" ? patient : doctor}

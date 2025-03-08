@@ -15,6 +15,7 @@ import ReportPage from "./pages/ReportPage";
 import Footer from "./Components/Footer";
 import UploadMedicalRecord from "./pages/UploadMedicalRecord";
 import Forum from "./pages/Forum";
+import Community from "./pages/Community";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/contactdoctor" element={<Contactdoctor />} />
         <Route path="/consultdoctor" element={<ConsultDoctor />} />
         <Route path="/forum" element={<Forum />} />
+        <Route path="/community" element={<Community />} />
         <Route path="/UserProfile" element={<UserProfile />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/checkpatient" element={<CheckPatient />} />
